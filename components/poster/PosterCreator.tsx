@@ -1,13 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/supabaseClient';
 import Image from 'next/image';
 
 export default function ReservationPage() {
-  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,40 +27,37 @@ export default function ReservationPage() {
     setIsLoading(true);
     setMessage('');
 
-    const { error } = await supabase.from('registrations').insert([
-      {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        expectations: formData.expectations,
-      },
-    ]);
+    try {
+      const { error } = await supabase.from('registrations').insert([
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          expectations: formData.expectations,
+        },
+      ]);
 
-    if (error) {
-      setMessage(error.message);
-      setIsLoading(false);
-    } else {
+      if (error) throw error;
+
       setSubmitted(true);
-      // Redirection immédiate sans délai
-      router.push('https://web-production-b99b2.up.railway.app/');
+    } catch (err: any) {
+      console.error(err);
+      setMessage("Une erreur est survenue. Veuillez réessayer.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center px-4 py-10 relative overflow-hidden">
-      {/* Background avec effet de dégradé et image */}
+      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-[#1a0a0a] to-black z-0"></div>
       <div className="absolute inset-0 opacity-20 z-0">
-        <Image
-          src="/images/bg.jpg"
-          alt="Background"
-          fill
-          className="object-cover"
-        />
+        <Image src="/images/bg.jpg" alt="Background" fill className="object-cover" />
       </div>
-      
+
       <div className="relative z-10 w-full max-w-md md:max-w-lg">
-        {/* En-tête avec logo ou titre */}
+        {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -89,6 +84,7 @@ export default function ReservationPage() {
               onSubmit={handleSubmit}
               className="bg-gradient-to-br from-[#111] to-[#1a1a1a] p-8 md:p-10 rounded-2xl shadow-2xl border border-white/10 backdrop-blur-sm"
             >
+              {/* Nom */}
               <div className="mb-6">
                 <label className="block text-gray-300 mb-2 text-sm font-medium">Nom complet</label>
                 <input
@@ -97,11 +93,12 @@ export default function ReservationPage() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-black/30 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 rounded-lg bg-black/30 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition-all"
                   placeholder="Votre nom complet"
                 />
               </div>
 
+              {/* Email */}
               <div className="mb-6">
                 <label className="block text-gray-300 mb-2 text-sm font-medium">Email</label>
                 <input
@@ -110,11 +107,12 @@ export default function ReservationPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-black/30 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 rounded-lg bg-black/30 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition-all"
                   placeholder="votre@email.com"
                 />
               </div>
 
+              {/* Téléphone */}
               <div className="mb-6">
                 <label className="block text-gray-300 mb-2 text-sm font-medium">Téléphone</label>
                 <input
@@ -123,22 +121,24 @@ export default function ReservationPage() {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-black/30 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 rounded-lg bg-black/30 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition-all"
                   placeholder="Votre numéro de téléphone"
                 />
               </div>
 
+              {/* Attentes */}
               <div className="mb-8">
                 <label className="block text-gray-300 mb-2 text-sm font-medium">Vos attentes</label>
                 <textarea
                   name="expectations"
                   value={formData.expectations}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-black/30 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none h-24"
+                  className="w-full px-4 py-3 rounded-lg bg-black/30 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-red-500 resize-none h-24 transition-all"
                   placeholder="Qu'attendez-vous de cet événement ?"
                 />
               </div>
 
+              {/* Submit button */}
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.02 }}
@@ -157,19 +157,12 @@ export default function ReservationPage() {
                 ) : (
                   <>
                     <span>Confirmer ma réservation</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
                   </>
                 )}
               </motion.button>
 
               {message && (
-                <motion.p 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-center text-red-400 mt-4 text-sm"
-                >
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center text-red-400 mt-4 text-sm">
                   {message}
                 </motion.p>
               )}
@@ -179,6 +172,7 @@ export default function ReservationPage() {
               </p>
             </motion.form>
           ) : (
+            // Success message
             <motion.div
               key="success"
               initial={{ opacity: 0, scale: 0.8 }}
@@ -203,7 +197,7 @@ export default function ReservationPage() {
               </h2>
               
               <p className="text-gray-300 mb-6 leading-relaxed">
-                Votre réservation a bien été enregistrée. Vous allez être redirigé vers la génération de votre affiche personnalisée.
+                Votre réservation a bien été enregistrée.
               </p>
               
               <div className="bg-black/30 p-4 rounded-lg border border-white/10 mb-6">
@@ -211,35 +205,10 @@ export default function ReservationPage() {
                 <p className="text-white font-medium">{formData.email}</p>
               </div>
               
-              <motion.div 
-                className="flex justify-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-              >
-                <div className="w-12 h-12 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
-              </motion.div>
+            
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Lien de retour */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="text-center mt-8"
-        >
-          <button
-            onClick={() => router.back()}
-            className="text-gray-400 hover:text-white text-sm flex items-center justify-center gap-1 mx-auto transition-colors"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-            </svg>
-            Retour à la page précédente
-          </button>
-        </motion.div>
       </div>
     </div>
   );

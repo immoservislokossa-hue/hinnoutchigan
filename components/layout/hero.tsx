@@ -133,6 +133,7 @@ const HeroSection = () => {
               stiffness: 120
             }}
           >
+            <br />
             HINNOU TCHIGAN
           </motion.span>
           <motion.span 
