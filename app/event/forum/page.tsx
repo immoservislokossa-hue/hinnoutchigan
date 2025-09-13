@@ -210,62 +210,48 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Programme */}
-      <section className="py-16 lg:py-24 bg-[#1a0a0a] relative" id="programme">
-        <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-5"></div>
-        <div className="container mx-auto px-4 sm:px-6 relative">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="inline-block mb-4">
-              <div className="w-16 h-1 bg-yellow-500 mb-2 mx-auto"></div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
-                Programme
-              </h2>
-            </div>
-            <p className="text-lg md:text-xl text-gray-300">
-              Découvrez le déroulé de cette journée riche en découvertes et rencontres.
-            </p>
-          </motion.div>
+   {/* Programme */}
+<section className="py-16 lg:py-24 bg-[#1a0a0a] relative" id="programme">
+  <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-5"></div>
+  <div className="container mx-auto px-4 sm:px-6 relative">
+    <motion.div 
+      className="text-center max-w-3xl mx-auto mb-16"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7 }}
+    >
+      <div className="inline-block mb-4">
+        <div className="w-16 h-1 bg-yellow-500 mb-2 mx-auto"></div>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
+          Programme
+        </h2>
+      </div>
+      <p className="text-lg md:text-xl text-gray-300">
+        Découvrez le déroulé de cette journée riche en découvertes et rencontres.
+      </p>
+    </motion.div>
 
-          <div className="max-w-4xl mx-auto">
-            {[
-              { hour: '09:00 - 10:30', title: "Cérémonie d'ouverture", desc: "Mot de bienvenue et présentation des enjeux." },
-              { hour: '10:30 - 12:00', title: 'Table ronde principale', desc: 'Échanges sur les tendances et innovations du secteur.' },
-              { hour: '12:00 - 13:30', title: 'Pause déjeuner & networking', desc: "Échange informel autour d'un buffet." },
-              { hour: '13:30 - 15:00', title: 'Ateliers parallèles', desc: 'Sessions pratiques sur des thématiques spécifiques.' },
-              { hour: '15:30 - 17:00', title: 'Clôture & cocktail', desc: 'Synthèse des travaux et moment convivial.' },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="flex mb-10 last:mb-0"
-              >
-                <div className="flex-shrink-0 w-24 md:w-32 text-right pr-6 pt-1">
-                  <span className="bg-yellow-500/10 text-yellow-500 text-sm font-medium px-3 py-1 rounded-full">
-                    {item.hour}
-                  </span>
-                </div>
-                <div className="flex-grow relative pl-8 pb-10">
-                  <div className="absolute left-0 top-2 w-4 h-4 bg-yellow-500 rounded-full"></div>
-                  <div className="absolute left-2 top-2 w-0.5 h-full bg-yellow-500/30"></div>
-                  <div className="bg-gradient-to-br from-[#1a0a0a] to-[#2a0a0a] p-6 rounded-2xl border border-white/10 shadow-lg hover:border-yellow-500/30 transition-colors">
-                    <h3 className="font-semibold text-lg md:text-xl mb-2 text-white">{item.title}</h3>
-                    <p className="text-gray-300">{item.desc}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+    <div className="max-w-4xl mx-auto text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+        className="bg-gradient-to-br from-[#1a0a0a] to-[#2a0a0a] p-8 rounded-2xl border border-white/10 shadow-lg hover:border-yellow-500/30 transition-colors"
+      >
+        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+          L’événement aura lieu <span className="text-yellow-500">en ligne</span>
+        </h3>
+        <p className="text-lg text-gray-300">
+          De <span className="text-yellow-500 font-semibold">09h00</span> à 
+          <span className="text-yellow-500 font-semibold"> 12h00</span>.
+        </p>
+      </motion.div>
+    </div>
+  </div>
+</section>
+
 
       {/* CTA */}
       <section className="py-16 lg:py-24 bg-gradient-to-r from-red-700 to-red-900 text-white text-center relative overflow-hidden">
