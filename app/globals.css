@@ -1,0 +1,559 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Système de design — Sénat des Jeunes du Bénin
+   Couleurs tirées du logo (vert, or/jaune, rouge) ; polices : Cinzel
+   (titres institutionnels), Cormorant Garamond (accroches), Inter (texte).
+   ========================================================================== */
+
+@theme {
+  --color-green-950: #08260f;
+  --color-green-900: #0d3318;
+  --color-green-800: #14532a;
+  --color-green-700: #1b5e2a;
+  --color-green-600: #2e7d32;
+  --color-green-100: #e4efe3;
+
+  --color-gold-200: #f1dc9b;
+  --color-gold-300: #e8c766;
+  --color-gold-400: #d9ae3f;
+  --color-gold-500: #c3961c;
+  --color-gold-600: #9a7413;
+
+  --color-sun: #f2c500;
+  --color-flag-red: #c8102e;
+
+  --color-cream-50: #fdfbf5;
+  --color-cream-100: #faf6ea;
+  --color-cream-200: #f1ead6;
+  --color-cream-300: #e4d9b9;
+
+  --color-ink: #14201a;
+  --color-ink-soft: #3b4a42;
+  --color-ink-mute: #66756d;
+
+  --font-display: "Cinzel", "Trajan Pro", Georgia, serif;
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --ease-lux: cubic-bezier(0.22, 0.8, 0.24, 1);
+}
+
+:root {
+  color-scheme: light;
+  --header-h: 5.25rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-cream-50);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-gold-300);
+  color: var(--color-green-950);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold-500);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Typographie ---------- */
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.lede {
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 1.1rem + 1vw, 1.85rem);
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+  text-wrap: pretty;
+}
+
+.prose-sjb p {
+  margin: 0 0 1.15em;
+  color: var(--color-ink-soft);
+}
+.prose-sjb strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+.prose-sjb a {
+  color: var(--color-green-700);
+  text-decoration: underline;
+  text-decoration-color: var(--color-gold-400);
+  text-underline-offset: 3px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-gold-600);
+}
+.eyebrow::before {
+  content: "";
+  width: 2.5rem;
+  height: 1px;
+  background: currentColor;
+}
+.on-dark .eyebrow,
+.eyebrow.on-dark {
+  color: var(--color-gold-300);
+}
+
+/* Filet orné : deux lignes et un losange */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--color-gold-500);
+}
+.ornament::before,
+.ornament::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, currentColor);
+}
+.ornament::after {
+  background: linear-gradient(270deg, transparent, currentColor);
+}
+.ornament > i {
+  width: 7px;
+  height: 7px;
+  background: currentColor;
+  transform: rotate(45deg);
+  display: block;
+}
+
+/* ---------- Boutons : une seule direction artistique « Sceau » ----------
+   Cadre doré double (bordure + filet intérieur), capitales Cinzel espacées,
+   balayage doré au survol, flèche qui s'allonge. */
+
+.btn {
+  --btn-bg: var(--color-green-800);
+  --btn-fg: var(--color-cream-50);
+  --btn-edge: var(--color-gold-500);
+  --btn-sweep: var(--color-gold-300);
+  --btn-fg-hover: var(--color-green-950);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  padding: 1.05rem 2rem;
+  min-height: 3.25rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.76rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--btn-fg);
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-edge);
+  cursor: pointer;
+  transition:
+    color 0.5s var(--ease-lux),
+    box-shadow 0.5s var(--ease-lux),
+    transform 0.5s var(--ease-lux);
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid color-mix(in srgb, var(--btn-edge) 55%, transparent);
+  pointer-events: none;
+  transition: inset 0.5s var(--ease-lux), border-color 0.5s var(--ease-lux);
+}
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, var(--btn-sweep), var(--color-gold-400));
+  transform: translateX(-101%);
+  transition: transform 0.7s var(--ease-lux);
+}
+.btn:hover,
+.btn:focus-visible {
+  color: var(--btn-fg-hover);
+  box-shadow: 0 12px 30px -14px rgb(8 38 15 / 0.55);
+}
+.btn:hover::after,
+.btn:focus-visible::after {
+  transform: translateX(0);
+}
+.btn:hover::before {
+  inset: 6px;
+  border-color: color-mix(in srgb, var(--btn-fg-hover) 35%, transparent);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn-arrow {
+  position: relative;
+  display: inline-block;
+  width: 1.6rem;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.5s var(--ease-lux);
+}
+.btn-arrow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+.btn:hover .btn-arrow {
+  width: 2.2rem;
+}
+
+/* Variante or : pour les fonds verts */
+.btn-gold {
+  --btn-bg: var(--color-gold-400);
+  --btn-fg: var(--color-green-950);
+  --btn-edge: var(--color-gold-200);
+  --btn-sweep: var(--color-cream-50);
+  --btn-fg-hover: var(--color-green-950);
+}
+/* Variante contour : transparente */
+.btn-outline {
+  --btn-bg: transparent;
+  --btn-fg: var(--color-cream-50);
+  --btn-edge: var(--color-gold-400);
+  --btn-sweep: var(--color-gold-300);
+  --btn-fg-hover: var(--color-green-950);
+}
+.btn-outline-dark {
+  --btn-bg: transparent;
+  --btn-fg: var(--color-green-800);
+  --btn-edge: var(--color-gold-500);
+  --btn-sweep: var(--color-gold-300);
+  --btn-fg-hover: var(--color-green-950);
+}
+.btn-sm {
+  padding: 0.8rem 1.4rem;
+  min-height: 2.6rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+}
+
+/* Lien éditorial : texte + soulignement or animé */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-green-700);
+  text-decoration: none;
+  background-image: linear-gradient(var(--color-gold-500), var(--color-gold-500));
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  padding-bottom: 6px;
+  transition: background-size 0.6s var(--ease-lux), color 0.3s;
+}
+.link-arrow:hover {
+  background-size: 100% 1px;
+  color: var(--color-green-900);
+}
+
+/* ---------- Surfaces ---------- */
+
+.surface-dark {
+  background:
+    radial-gradient(120% 90% at 85% 0%, rgb(46 125 50 / 0.35), transparent 60%),
+    linear-gradient(180deg, var(--color-green-900), var(--color-green-950));
+  color: var(--color-cream-100);
+}
+.surface-dark .prose-sjb p,
+.surface-dark .lede {
+  color: color-mix(in srgb, var(--color-cream-100) 82%, transparent);
+}
+
+.card-lux {
+  position: relative;
+  background: var(--color-cream-50);
+  border: 1px solid var(--color-cream-300);
+  transition:
+    transform 0.6s var(--ease-lux),
+    box-shadow 0.6s var(--ease-lux),
+    border-color 0.6s var(--ease-lux);
+}
+.card-lux::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-top: 2px solid var(--color-gold-500);
+  border-left: 2px solid var(--color-gold-500);
+  transition: width 0.6s var(--ease-lux), height 0.6s var(--ease-lux);
+  pointer-events: none;
+}
+.card-lux:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-gold-400);
+  box-shadow: 0 28px 50px -28px rgb(8 38 15 / 0.45);
+}
+.card-lux:hover::before {
+  width: 100%;
+  height: 100%;
+  opacity: 0.35;
+}
+
+.card-dark {
+  position: relative;
+  background: rgb(255 255 255 / 0.04);
+  border: 1px solid rgb(232 199 102 / 0.28);
+  backdrop-filter: blur(4px);
+  transition: transform 0.6s var(--ease-lux), border-color 0.6s var(--ease-lux), background 0.6s;
+}
+.card-dark:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-gold-300);
+  background: rgb(255 255 255 / 0.07);
+}
+
+/* Marqueur « À compléter » : visible tant qu'une information manque */
+.todo {
+  display: inline-block;
+  padding: 0.05em 0.55em;
+  font-family: var(--font-sans);
+  font-size: 0.78em;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  color: var(--color-gold-600);
+  background: color-mix(in srgb, var(--color-gold-300) 22%, transparent);
+  border: 1px dashed var(--color-gold-500);
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.surface-dark .todo,
+.on-dark .todo {
+  color: var(--color-gold-200);
+  background: rgb(232 199 102 / 0.14);
+  border-color: var(--color-gold-300);
+}
+
+/* ---------- Mouvement ---------- */
+
+html[data-js] .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 1s var(--ease-lux) var(--reveal-delay, 0ms),
+    transform 1s var(--ease-lux) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+html[data-js] .reveal[data-dir="left"] {
+  transform: translateX(-36px);
+}
+html[data-js] .reveal[data-dir="right"] {
+  transform: translateX(36px);
+}
+html[data-js] .reveal[data-dir="fade"] {
+  transform: none;
+}
+html[data-js] .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Ligne qui se dessine */
+.draw-line {
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.4s var(--ease-lux) var(--reveal-delay, 0ms);
+}
+.is-visible .draw-line,
+.draw-line.is-visible {
+  transform: scaleX(1);
+}
+html:not([data-js]) .draw-line {
+  transform: none;
+}
+
+@keyframes sun-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes sun-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.06);
+  }
+}
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+.hero-rise {
+  animation: hero-rise 1.4s var(--ease-lux) both;
+  animation-delay: var(--d, 0ms);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  html[data-js] .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Utilitaires de mise en page */
+.container-sjb {
+  width: 100%;
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+.section-y {
+  padding-block: clamp(4.5rem, 9vw, 8rem);
+}
+
+/* Formulaires */
+.field-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-green-800);
+}
+.field {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--color-ink);
+  background: var(--color-cream-50);
+  border: 1px solid var(--color-cream-300);
+  border-bottom: 2px solid var(--color-cream-300);
+  border-radius: 0;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+}
+.field:hover {
+  border-color: var(--color-gold-400);
+}
+.field:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--color-gold-500);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-gold-300) 35%, transparent);
+}
+.field[aria-invalid="true"] {
+  border-color: var(--color-flag-red);
+}
+textarea.field {
+  min-height: 9rem;
+  resize: vertical;
+}
+select.field {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--color-gold-600) 50%),
+    linear-gradient(135deg, var(--color-gold-600) 50%, transparent 50%);
+  background-position: calc(100% - 1.25rem) 55%, calc(100% - 0.9rem) 55%;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 2.5rem;
+}
