@@ -23,9 +23,9 @@ export default function CommissionsPage() {
         <div className="container-sjb">
           <ol className="grid gap-px border border-cream-300 bg-cream-300 md:grid-cols-2">
             {commissions.map((c, i) => (
-              <Reveal as="li" key={c.n} delay={(i % 2) * 90} className={`group bg-cream-50 p-10 transition-colors duration-500 hover:bg-green-800 ${i === 4 ? "md:col-span-2" : ""}`}>
-                <p className="font-display text-5xl font-semibold text-gold-500 transition-colors group-hover:text-gold-300">{c.n}</p>
-                <h2 className="h-display mt-6 text-2xl text-green-900 transition-colors group-hover:text-cream-50">{c.name}</h2>
+              <Reveal as="li" key={c.n} delay={(i % 2) * 90} className={`group bg-cream-50 p-10 transition-colors duration-500 hover:bg-green-50 ${i === 4 ? "md:col-span-2" : ""}`}>
+                <p className="font-display text-5xl font-semibold text-gold-500 transition-colors">{c.n}</p>
+                <h2 className="h-display mt-6 text-2xl text-green-900 transition-colors">{c.name}</h2>
               </Reveal>
             ))}
           </ol>

@@ -33,7 +33,7 @@ export default function ContactPage() {
                 ["Téléphone", site.contact.phones.length ? site.contact.phones.join(" · ") : <Todo what="numéros officiels" />],
               ].map(([k, v], i) => (
                 <Reveal key={String(k)} delay={i * 80}>
-                  <dt className="font-display text-[0.68rem] uppercase tracking-[0.28em] text-gold-600">{k}</dt>
+                  <dt className="font-display text-xs uppercase tracking-[0.1em] text-gold-600">{k}</dt>
                   <dd className="mt-2 font-serif text-2xl text-green-900">{v}</dd>
                 </Reveal>
               ))}

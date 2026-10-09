@@ -31,7 +31,7 @@ export default function PartenairesPage() {
       <section className="section-y">
         <div className="container-sjb">
           <SectionHeading eyebrow="Ils nous font confiance" title="Nos partenaires" />
-          <Reveal className="mt-12 border border-dashed border-gold-400/70 bg-cream-100 p-12 text-center">
+          <Reveal className="mt-12 border border-dashed border-cream-300 bg-cream-100 p-12 text-center">
             <p className="font-serif text-2xl text-ink-soft">
               <Todo what="logos et noms des partenaires conventionnés" />
             </p>
@@ -39,16 +39,16 @@ export default function PartenairesPage() {
         </div>
       </section>
 
-      <section className="surface-dark on-dark section-y">
+      <section className="border-t border-cream-300 section-y">
         <div className="container-sjb">
-          <SectionHeading dark eyebrow="Nos principes" title="Un partenariat clair et encadré" />
+          <SectionHeading eyebrow="Nos principes" title="Un partenariat clair et encadré" />
           <ul className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {principles.map(([t, d], i) => (
               <Reveal as="li" key={t} delay={i * 90}>
-                <div className="card-dark h-full p-8">
-                  <p className="font-display text-3xl font-semibold text-gold-300">{String(i + 1).padStart(2, "0")}</p>
-                  <h3 className="h-display mt-5 text-lg text-cream-50">{t}</h3>
-                  <p className="mt-3 text-cream-100/75">{d}</p>
+                <div className="card-lux h-full p-8">
+                  <p className="font-display text-3xl font-semibold text-green-700">{String(i + 1).padStart(2, "0")}</p>
+                  <h3 className="h-display mt-5 text-lg text-green-900">{t}</h3>
+                  <p className="mt-3 text-ink-soft">{d}</p>
                 </div>
               </Reveal>
             ))}

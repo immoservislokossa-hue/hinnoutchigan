@@ -28,7 +28,7 @@ export default function DocumentsPage() {
             {documents.map((d, i) => (
               <Reveal as="li" key={d.slug} delay={i * 90} className="grid gap-6 py-10 md:grid-cols-[1fr_auto] md:items-center">
                 <div>
-                  <p className="font-display text-[0.66rem] uppercase tracking-[0.25em] text-gold-600">
+                  <p className="font-display text-xs uppercase tracking-[0.1em] text-gold-600">
                     {d.kind} · {d.date}
                   </p>
                   <h2 className="h-display mt-3 text-xl text-green-900 sm:text-2xl">{d.title}</h2>
@@ -45,7 +45,7 @@ export default function DocumentsPage() {
         </div>
       </section>
 
-      <section className="section-y bg-cream-100">
+      <section className="section-y border-t border-cream-300">
         <div className="container-sjb grid gap-8 md:grid-cols-3">
           {[
             ["Règlement intérieur", "règlement intérieur approuvé par l'Assemblée Plénière"],

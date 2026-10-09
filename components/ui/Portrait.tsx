@@ -3,9 +3,8 @@ import { Todo } from "./Todo";
 /** Cadre portrait : silhouette élégante tant que la photo officielle n'est pas fournie. */
 export function Portrait({ photo, alt, className = "" }: { photo?: string | null; alt: string; className?: string }) {
   return (
-    <div className={`relative aspect-[4/5] overflow-hidden border border-gold-500/70 bg-gradient-to-b from-green-100 to-cream-200 ${className}`}>
-      <span aria-hidden="true" className="absolute inset-[6px] z-10 border border-gold-400/50" />
-      {photo ? (
+    <div className={`relative aspect-[4/5] overflow-hidden rounded-3xl border border-cream-300 bg-green-50 ${className}`}>
+            {photo ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={photo} alt={alt} className="h-full w-full object-cover" />
       ) : (

@@ -1,16 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource/cinzel/latin-400.css";
-import "@fontsource/cinzel/latin-600.css";
-import "@fontsource/cinzel/latin-700.css";
-import "@fontsource/cormorant-garamond/latin-400.css";
-import "@fontsource/cormorant-garamond/latin-400-italic.css";
-import "@fontsource/cormorant-garamond/latin-500.css";
-import "@fontsource/cormorant-garamond/latin-500-italic.css";
-import "@fontsource/cormorant-garamond/latin-600.css";
-import "@fontsource-variable/inter/wght.css";
+import "@fontsource/poppins/latin-400.css";
+import "@fontsource/poppins/latin-500.css";
+import "@fontsource/poppins/latin-600.css";
+import "@fontsource/poppins/latin-700.css";
+import "@fontsource/poppins/latin-400-italic.css";
+import "@fontsource-variable/space-grotesk/wght.css";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -44,7 +42,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0d3318",
+  themeColor: "#0d3a1d",
   width: "device-width",
   initialScale: 1,
 };
@@ -69,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>
       <body>
+        <ScrollProgress />
         <Header />
         <main id="contenu">{children}</main>
         <Footer />

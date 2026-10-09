@@ -24,7 +24,7 @@ export default function AgendaPage() {
       <section className="section-y">
         <div className="container-sjb">
           <SectionHeading eyebrow="Prochaines dates" title="À venir" />
-          <Reveal className="mt-12 border border-dashed border-gold-400/70 bg-cream-100 p-10 text-center">
+          <Reveal className="mt-12 border border-dashed border-cream-300 bg-cream-100 p-10 text-center">
             <p className="font-serif text-2xl text-ink-soft">
               Aucune date publiée pour le moment. <Todo what="prochaine Assemblée Plénière et événements" />
             </p>
@@ -32,15 +32,15 @@ export default function AgendaPage() {
         </div>
       </section>
 
-      <section className="surface-dark on-dark section-y">
+      <section className="border-t border-cream-300 section-y">
         <div className="container-sjb">
-          <SectionHeading dark eyebrow="Calendrier statutaire" title="Un rythme défini par les statuts" lede="Fréquences et délais fixés par les textes fondamentaux et le décret du 17 août 2026." />
-          <ul className="mt-16 divide-y divide-gold-400/20 border-y border-gold-400/20">
+          <SectionHeading eyebrow="Calendrier statutaire" title="Un rythme défini par les statuts" lede="Fréquences et délais fixés par les textes fondamentaux et le décret du 17 août 2026." />
+          <ul className="mt-16 divide-y divide-cream-300 border-y border-cream-300">
             {statutoryCalendar.map((c, i) => (
               <Reveal as="li" key={c.title} delay={(i % 3) * 60} className="grid gap-4 py-8 md:grid-cols-[14rem_1fr_1.4fr] md:items-baseline md:gap-10">
-                <p className="font-display text-[0.7rem] uppercase tracking-[0.25em] text-gold-300">{c.freq}</p>
-                <h3 className="h-display text-lg text-cream-50">{c.title}</h3>
-                <p className="text-cream-100/75">{c.text}</p>
+                <p className="font-display text-xs uppercase tracking-[0.1em] text-green-700">{c.freq}</p>
+                <h3 className="h-display text-lg text-green-900">{c.title}</h3>
+                <p className="text-ink-soft">{c.text}</p>
               </Reveal>
             ))}
           </ul>

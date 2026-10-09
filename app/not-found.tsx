@@ -8,7 +8,7 @@ export default function NotFound() {
         <ButtonLink href="/" variant="gold">
           Retour à l&apos;accueil
         </ButtonLink>
-        <ButtonLink href="/contact" variant="outline">
+        <ButtonLink href="/contact" variant="outline-dark">
           Nous contacter
         </ButtonLink>
       </div>

@@ -30,7 +30,7 @@ export default function PresidencePage() {
           <Reveal dir="left">
             <Portrait alt="Portrait officiel du Président du Sénat des Jeunes du Bénin" />
             <div className="mt-7">
-              <p className="font-display text-[0.66rem] uppercase tracking-[0.28em] text-gold-600">Président du Bureau Exécutif National</p>
+              <p className="font-display text-xs uppercase tracking-[0.1em] text-gold-600">Président du Bureau Exécutif National</p>
               <p className="h-display mt-3 text-2xl text-green-900">
                 <Todo what="prénoms et nom du Président" />
               </p>
@@ -63,14 +63,14 @@ export default function PresidencePage() {
         </div>
       </section>
 
-      <section className="surface-dark on-dark section-y">
+      <section className="border-t border-cream-300 section-y">
         <div className="container-sjb grid gap-16 lg:grid-cols-[1fr_1.2fr]">
-          <SectionHeading dark eyebrow="Attributions statutaires" title="Ce que prévoient les statuts" lede="Article 16.1 des statuts du SJB." />
-          <ul className="divide-y divide-gold-400/20">
+          <SectionHeading eyebrow="Attributions statutaires" title="Ce que prévoient les statuts" lede="Article 16.1 des statuts du SJB." />
+          <ul className="divide-y divide-cream-300">
             {president.duties.map((d, i) => (
               <Reveal as="li" key={d} delay={i * 80} className="flex gap-6 py-6 first:pt-0">
-                <span className="font-display text-xl font-semibold text-gold-300">{String(i + 1).padStart(2, "0")}</span>
-                <p className="font-serif text-2xl leading-snug text-cream-50">{d}</p>
+                <span className="font-display text-xl font-semibold text-green-700">{String(i + 1).padStart(2, "0")}</span>
+                <p className="font-serif text-2xl leading-snug text-green-900">{d}</p>
               </Reveal>
             ))}
           </ul>

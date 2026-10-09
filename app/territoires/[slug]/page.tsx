@@ -68,15 +68,15 @@ export default async function DepartmentPage({ params }: { params: Promise<Param
         </div>
       </section>
 
-      <section className="surface-dark on-dark section-y">
+      <section className="border-t border-cream-300 section-y">
         <div className="container-sjb">
-          <SectionHeading dark eyebrow="Sections communales" title={`${d.communes.length} commune${d.communes.length > 1 ? "s" : ""}, ${d.communes.length} section${d.communes.length > 1 ? "s" : ""} communale${d.communes.length > 1 ? "s" : ""}`} />
+          <SectionHeading eyebrow="Sections communales" title={`${d.communes.length} commune${d.communes.length > 1 ? "s" : ""}, ${d.communes.length} section${d.communes.length > 1 ? "s" : ""} communale${d.communes.length > 1 ? "s" : ""}`} />
           <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {d.communes.map((c, i) => (
               <Reveal as="li" key={c} delay={(i % 3) * 80}>
-                <div className="card-dark flex items-center justify-between p-6">
-                  <span className="h-display text-lg text-cream-50">{c}</span>
-                  {c === d.seat && <span className="font-display text-[0.6rem] uppercase tracking-[0.22em] text-gold-300">Chef-lieu</span>}
+                <div className="card-lux flex items-center justify-between p-6">
+                  <span className="h-display text-lg text-green-900">{c}</span>
+                  {c === d.seat && <span className="font-display text-xs uppercase tracking-[0.1em] text-green-700">Chef-lieu</span>}
                 </div>
               </Reveal>
             ))}

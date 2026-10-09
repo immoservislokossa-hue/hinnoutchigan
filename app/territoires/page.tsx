@@ -4,7 +4,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Counter } from "@/components/ui/Counter";
-import { Cartogram } from "@/components/home/Cartogram";
+import { InteractiveMap } from "@/components/home/InteractiveMap";
 import { departments, keyFigures, regions } from "@/content/structure";
 
 export const metadata: Metadata = {
@@ -28,21 +28,21 @@ export default function TerritoiresPage() {
         <div className="container-sjb">
           <SectionHeading eyebrow="Carte des départements" title="Sélectionnez un département" lede="Disposés selon leur position géographique, du nord au sud." />
           <div className="mt-16">
-            <Cartogram />
+            <InteractiveMap />
           </div>
         </div>
       </section>
 
-      <section className="surface-dark on-dark section-y">
+      <section className="border-t border-cream-300 section-y">
         <div className="container-sjb">
-          <dl className="grid gap-px bg-gold-400/25 sm:grid-cols-2 lg:grid-cols-4">
+          <dl className="grid gap-px bg-cream-300 sm:grid-cols-2 lg:grid-cols-4">
             {keyFigures.map((f) => (
-              <div key={f.label} className="bg-green-950 p-10 text-center">
-                <dt className="font-display text-[0.66rem] uppercase tracking-[0.3em] text-cream-100/70">{f.label}</dt>
-                <dd className="mt-4 font-display text-6xl font-semibold text-gold-300">
+              <div key={f.label} className="bg-white p-10 text-center">
+                <dt className="font-display text-xs uppercase tracking-[0.3em] text-ink-soft">{f.label}</dt>
+                <dd className="mt-4 font-display text-6xl font-semibold text-green-700">
                   <Counter value={f.value} />
                 </dd>
-                <p className="mt-3 text-sm text-cream-100/60">{f.note}</p>
+                <p className="mt-3 text-sm text-ink-soft">{f.note}</p>
               </div>
             ))}
           </dl>
@@ -60,7 +60,7 @@ export default function TerritoiresPage() {
             {regions.map((r, i) => (
               <Reveal as="li" key={r.name} delay={(i % 3) * 100}>
                 <article className="card-lux h-full p-9">
-                  <p className="font-display text-[0.64rem] uppercase tracking-[0.28em] text-gold-600">Région {i + 1}</p>
+                  <p className="font-display text-xs uppercase tracking-[0.1em] text-gold-600">Région {i + 1}</p>
                   <h3 className="h-display mt-4 text-xl text-green-900">{r.name}</h3>
                   <ul className="mt-6 space-y-2">
                     {r.departments.map((slug) => {

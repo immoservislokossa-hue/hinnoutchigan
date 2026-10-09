@@ -50,18 +50,18 @@ export default function SenatPage() {
         </div>
       </section>
 
-      <section className="surface-dark on-dark section-y">
+      <section className="border-t border-cream-300 section-y">
         <div className="container-sjb">
           <Reveal className="mx-auto max-w-4xl text-center">
-            <span className="eyebrow on-dark">Notre vision</span>
-            <blockquote className="mt-9 font-serif text-3xl font-medium italic leading-snug text-cream-50 sm:text-4xl lg:text-5xl">
+            <span className="eyebrow ">Notre vision</span>
+            <blockquote className="mt-9 font-serif text-3xl font-medium italic leading-snug text-green-900 sm:text-4xl lg:text-5xl">
               « Un Bénin où chaque jeune, quelle que soit son origine ou sa condition sociale, dispose des ressources, des compétences
               et des espaces pour contribuer pleinement au développement national. »
             </blockquote>
             <div className="mx-auto mt-12 max-w-xs">
               <Ornament />
             </div>
-            <p className="mt-8 text-cream-100/75">
+            <p className="mt-8 text-ink-soft">
               Le SJB aspire à devenir le cadre de référence de la jeunesse béninoise engagée, inclusive et panafricaine.
             </p>
           </Reveal>
@@ -85,7 +85,7 @@ export default function SenatPage() {
         </div>
       </section>
 
-      <section className="section-y bg-cream-100">
+      <section className="section-y border-t border-cream-300">
         <div className="container-sjb grid gap-16 lg:grid-cols-[1fr_1.4fr] lg:gap-24">
           <div className="lg:sticky lg:top-32 lg:self-start">
             <SectionHeading eyebrow="Objectifs statutaires" title="Huit engagements pour la jeunesse" />
@@ -117,7 +117,7 @@ export default function SenatPage() {
           <Reveal dir="right" className="flex justify-center">
             <div className="relative p-5">
               <span aria-hidden="true" className="absolute inset-0 border border-gold-400" />
-              <span aria-hidden="true" className="absolute inset-[9px] border border-gold-400/40" />
+              <span aria-hidden="true" className="absolute inset-[9px] border border-cream-300" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo.jpg" alt="Logo officiel du Sénat des Jeunes du Bénin" width={680} height={708} className="relative h-auto w-72 bg-white p-2 sm:w-80" />
             </div>
@@ -125,14 +125,14 @@ export default function SenatPage() {
         </div>
       </section>
 
-      <section className="section-y bg-cream-100">
+      <section className="section-y border-t border-cream-300">
         <div className="container-sjb">
           <SectionHeading eyebrow="Repères" title="Une histoire en textes" lede="Les dates clés, telles qu'elles figurent dans les textes officiels du SJB." />
-          <ol className="relative mt-16 border-l border-gold-400/60 pl-8 sm:ml-4 sm:pl-12">
+          <ol className="relative mt-16 border-l border-cream-300 pl-8 sm:ml-4 sm:pl-12">
             {timeline.map((t, i) => (
               <Reveal as="li" key={t.date} delay={(i % 3) * 70} className="relative pb-12 last:pb-0">
                 <span aria-hidden="true" className="absolute -left-[2.58rem] top-2 h-3 w-3 rotate-45 border border-gold-500 bg-cream-50 sm:-left-[3.58rem]" />
-                <p className="font-display text-[0.7rem] uppercase tracking-[0.28em] text-gold-600">{t.date}</p>
+                <p className="font-display text-xs uppercase tracking-[0.1em] text-gold-600">{t.date}</p>
                 <h3 className="h-display mt-2 text-xl text-green-900">{t.title}</h3>
                 <p className="mt-2 max-w-xl text-ink-soft">{t.text}</p>
               </Reveal>
@@ -143,8 +143,8 @@ export default function SenatPage() {
 
       <section className="section-y">
         <div className="container-sjb">
-          <Reveal className="mx-auto max-w-3xl border border-gold-400/60 bg-cream-100 p-8 text-center sm:p-12">
-            <p className="font-display text-[0.7rem] uppercase tracking-[0.28em] text-gold-600">Précision</p>
+          <Reveal className="mx-auto max-w-3xl border border-cream-300 bg-cream-100 p-8 text-center sm:p-12">
+            <p className="font-display text-xs uppercase tracking-[0.1em] text-gold-600">Précision</p>
             <p className="mt-5 font-serif text-2xl leading-snug text-green-900">
               Le Sénat des Jeunes du Bénin est une association de droit béninois. Il ne doit pas être confondu avec le Sénat de la
               République.

@@ -31,7 +31,7 @@ export default function BenPage() {
                 <article className={i === 0 ? "grid gap-10 md:grid-cols-[18rem_1fr] md:items-center" : ""}>
                   <Portrait alt={`Portrait du ou de la ${p.title}`} className={i === 0 ? "max-w-xs" : ""} />
                   <div className={i === 0 ? "" : "mt-7"}>
-                    <p className="font-display text-[0.66rem] uppercase tracking-[0.28em] text-gold-600">{p.origin}</p>
+                    <p className="font-display text-xs uppercase tracking-[0.1em] text-gold-600">{p.origin}</p>
                     <h2 className="h-display mt-3 text-2xl text-green-900">{p.title}</h2>
                     <p className="mt-2 font-serif text-xl italic text-ink-mute">
                       <Todo what="prénoms et nom" />
@@ -52,19 +52,19 @@ export default function BenPage() {
         </div>
       </section>
 
-      <section className="surface-dark on-dark section-y">
+      <section className="border-t border-cream-300 section-y">
         <div className="container-sjb grid gap-16 lg:grid-cols-[1fr_1.2fr]">
-          <SectionHeading dark eyebrow="Règles de composition" title="Inclusion, parité et renouvellement" />
-          <ul className="grid gap-px bg-gold-400/25 sm:grid-cols-2">
+          <SectionHeading eyebrow="Règles de composition" title="Inclusion, parité et renouvellement" />
+          <ul className="grid gap-px bg-cream-300 sm:grid-cols-2">
             {[
               ["7", "membres au sein du BEN"],
               ["40 %", "de femmes au minimum"],
               ["2 ans", "de mandat, renouvelable une fois"],
               ["< 30 ans", "pour le Président à l'élection"],
             ].map(([v, l], i) => (
-              <Reveal as="li" key={l} delay={i * 80} className="bg-green-950 p-8">
-                <p className="font-display text-4xl font-semibold text-gold-300">{v}</p>
-                <p className="mt-3 text-cream-100/75">{l}</p>
+              <Reveal as="li" key={l} delay={i * 80} className="bg-white p-8">
+                <p className="font-display text-4xl font-semibold text-green-700">{v}</p>
+                <p className="mt-3 text-ink-soft">{l}</p>
               </Reveal>
             ))}
           </ul>

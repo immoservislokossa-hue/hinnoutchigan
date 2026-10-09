@@ -23,25 +23,25 @@ export function NewsletterForm() {
       <label htmlFor={id} className="sr-only">
         Votre adresse e-mail
       </label>
-      <div className="flex border border-gold-400/50 transition-colors focus-within:border-gold-300">
+      <div className="flex items-center gap-2 rounded-full border border-cream-300 bg-green-50 p-1.5 pl-5 transition-colors focus-within:border-gold-300">
         <input
           id={id}
           name="email"
           type="email"
           autoComplete="email"
           placeholder="Votre adresse e-mail"
-          className="min-w-0 flex-1 bg-transparent px-4 py-3.5 text-sm text-cream-50 placeholder:text-cream-100/45 focus:outline-none"
+          className="min-w-0 flex-1 bg-transparent py-2 text-sm text-green-900 placeholder:text-ink-soft focus:outline-none"
         />
         <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0" />
         <button
           type="submit"
           disabled={state === "sending"}
-          className="border-l border-gold-400/50 px-5 font-display text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-gold-300 transition-colors hover:bg-gold-400 hover:text-green-950 focus-visible:bg-gold-400 focus-visible:text-green-950"
+          className="rounded-full bg-gold-400 px-5 py-2.5 text-sm font-semibold text-green-950 transition-colors hover:bg-gold-300"
         >
           {state === "sending" ? "…" : "Valider"}
         </button>
       </div>
-      <p aria-live="polite" className="mt-3 min-h-5 text-xs text-cream-100/70">
+      <p aria-live="polite" className="mt-3 min-h-5 text-xs text-ink-soft">
         {state === "invalid" && "Adresse e-mail invalide."}
         {state === "sent" && "Merci, votre inscription est enregistrée."}
         {state === "unconfigured" && "L'inscription en ligne sera bientôt activée."}

@@ -13,7 +13,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -24,93 +24,61 @@ export function Header() {
   }, [pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
-  const solid = scrolled || open;
   const isActive = (href?: string) => !!href && (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
     <>
       <a
         href="#contenu"
-        className="fixed left-4 top-4 z-[100] -translate-y-24 bg-gold-400 px-4 py-2 font-display text-xs uppercase tracking-widest text-green-950 focus:translate-y-0"
+        className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-full bg-gold-400 px-5 py-2.5 text-sm font-semibold text-green-950 focus:translate-y-0"
       >
         Aller au contenu
       </a>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-          solid ? "bg-cream-50/92 shadow-[0_1px_0_0_var(--color-cream-300)] backdrop-blur-md" : "bg-transparent"
-        }`}
-        style={{ height: solid ? "4.25rem" : "var(--header-h)" }}
-      >
-        <div className="container-sjb flex h-full items-center justify-between gap-6">
-          <Link href="/" aria-label="Sénat des Jeunes du Bénin, accueil" className="group flex items-center gap-4">
-            <span
-              className={`block overflow-hidden border border-gold-400 transition-all duration-500 ${
-                solid ? "h-10 w-10" : "h-12 w-12"
-              }`}
-            >
+      <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-4">
+        <div
+          className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border border-cream-300 bg-white py-2 pl-2.5 pr-2.5 transition-shadow duration-300 sm:pl-3 ${
+            scrolled ? "shadow-[0_14px_34px_-18px_rgb(8_38_19/0.35)]" : "shadow-[0_2px_10px_-6px_rgb(8_38_19/0.2)]"
+          }`}
+        >
+          <Link href="/" aria-label="Sénat des Jeunes du Bénin, accueil" className="flex shrink-0 items-center gap-3 rounded-full pr-3">
+            <span className="block h-11 w-11 overflow-hidden rounded-full ring-1 ring-black/10">
               <Logo size={96} priority className="h-full w-full object-cover" />
             </span>
-            <span className="hidden shrink-0 flex-col whitespace-nowrap leading-none sm:flex">
-              <span
-                className={`font-display text-[0.95rem] font-semibold tracking-[0.18em] transition-colors duration-500 ${
-                  solid ? "text-green-800" : "text-cream-50"
-                }`}
-              >
-                SÉNAT DES JEUNES
-              </span>
-              <span
-                className={`mt-1.5 font-display text-[0.62rem] tracking-[0.42em] transition-colors duration-500 ${
-                  solid ? "text-gold-600" : "text-gold-300"
-                }`}
-              >
-                DU BÉNIN
-              </span>
+            <span className="hidden whitespace-nowrap font-display text-[1.02rem] font-semibold leading-tight tracking-tight text-green-900 sm:block">
+              Sénat des Jeunes
+              <span className="block text-xs font-medium tracking-normal text-ink-mute">du Bénin</span>
             </span>
           </Link>
 
-          <nav aria-label="Navigation principale" className="hidden items-center xl:flex">
+          <nav aria-label="Navigation principale" className="hidden items-center gap-0.5 xl:flex">
             {navigation.map((item) => (
               <div key={item.label} className="group relative">
                 <Link
                   href={item.href ?? "#"}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className={`relative flex items-center gap-2 whitespace-nowrap px-3 py-2 font-display text-[0.68rem] font-semibold uppercase tracking-[0.17em] transition-colors duration-300 ${
-                    solid ? "text-green-900 hover:text-gold-600" : "text-cream-50 hover:text-gold-300"
+                  className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-[0.92rem] font-medium transition-colors ${
+                    isActive(item.href) ? "bg-green-50 text-green-800" : "text-ink hover:bg-green-50"
                   }`}
                 >
                   {item.label}
                   {item.children && (
-                    <span aria-hidden="true" className="mt-0.5 block h-1.5 w-1.5 rotate-45 border-b border-r border-current" />
+                    <svg aria-hidden="true" viewBox="0 0 12 12" className="h-3 w-3 opacity-60 transition-transform group-hover:rotate-180 group-focus-within:rotate-180">
+                      <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                   )}
-                  <span
-                    aria-hidden="true"
-                    className={`absolute inset-x-3 -bottom-0.5 h-px origin-left bg-gold-400 transition-transform duration-500 ${
-                      isActive(item.href) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                    }`}
-                  />
                 </Link>
                 {item.children && (
-                  <div className="invisible absolute left-1/2 top-full w-80 -translate-x-1/2 translate-y-3 pt-4 opacity-0 transition-all duration-300 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                    <div className="border border-gold-400/60 bg-cream-50 p-2 shadow-[0_30px_60px_-30px_rgb(8_38_15/0.5)]">
+                  <div className="invisible absolute left-1/2 top-full w-80 -translate-x-1/2 translate-y-2 pt-4 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                    <div className="rounded-3xl border border-cream-300 bg-white p-2 shadow-[0_24px_48px_-24px_rgb(8_38_19/0.35)]">
                       {item.children.map((c) => (
-                        <Link
-                          key={c.href + c.label}
-                          href={c.href}
-                          className="group/item block px-5 py-3.5 transition-colors hover:bg-cream-100"
-                        >
-                          <span className="block font-display text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-green-800 transition-colors group-hover/item:text-gold-600">
-                            {c.label}
-                          </span>
-                          {c.description && <span className="mt-1 block text-sm text-ink-mute">{c.description}</span>}
+                        <Link key={c.href + c.label} href={c.href} className="block rounded-2xl px-4 py-3 transition-colors hover:bg-green-50">
+                          <span className="block text-[0.92rem] font-semibold text-green-900">{c.label}</span>
+                          {c.description && <span className="mt-0.5 block text-sm text-ink-mute">{c.description}</span>}
                         </Link>
                       ))}
                     </div>
@@ -120,8 +88,8 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
-            <ButtonLink href="/rejoindre" small variant={solid ? "primary" : "gold"} className="hidden sm:inline-flex">
+          <div className="flex items-center gap-2">
+            <ButtonLink href="/rejoindre" small className="hidden sm:inline-flex">
               Rejoindre
             </ButtonLink>
             <button
@@ -130,50 +98,32 @@ export function Header() {
               aria-expanded={open}
               aria-controls="menu-mobile"
               aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-              className={`relative z-[60] flex h-11 w-11 flex-col items-center justify-center gap-[7px] xl:hidden ${
-                solid ? "text-green-900" : "text-cream-50"
-              }`}
+              className="relative flex h-11 w-11 flex-col items-center justify-center gap-[5px] rounded-full bg-green-50 text-green-900 xl:hidden"
             >
-              <span className={`block h-px w-7 bg-current transition-transform duration-500 ${open ? "translate-y-[4px] rotate-45" : ""}`} />
-              <span className={`block h-px w-7 bg-current transition-transform duration-500 ${open ? "-translate-y-[4px] -rotate-45" : ""}`} />
+              <span className={`block h-0.5 w-5 rounded bg-current transition-transform duration-300 ${open ? "translate-y-[3.5px] rotate-45" : ""}`} />
+              <span className={`block h-0.5 w-5 rounded bg-current transition-transform duration-300 ${open ? "-translate-y-[3.5px] -rotate-45" : ""}`} />
             </button>
           </div>
         </div>
-      </header>
 
-      <div
-        id="menu-mobile"
-        aria-hidden={!open}
-        className={`surface-dark fixed inset-0 z-[55] overflow-y-auto transition-[clip-path] duration-700 [transition-timing-function:var(--ease-lux)] xl:hidden ${
-          open ? "[clip-path:circle(150%_at_100%_0)]" : "pointer-events-none [clip-path:circle(0_at_100%_0)]"
-        }`}
-      >
-        <div className="container-sjb pb-16 pt-28">
-          <ul className="space-y-1">
-            {navigation.map((item, i) => (
-              <li
-                key={item.label}
-                className={`border-b border-gold-400/20 py-4 transition-all duration-700 ${
-                  open ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-                }`}
-                style={{ transitionDelay: open ? `${180 + i * 60}ms` : "0ms" }}
-              >
-                <Link
-                  href={item.href ?? "#"}
-                  tabIndex={open ? 0 : -1}
-                  className="font-display text-2xl font-semibold tracking-[0.08em] text-cream-50 hover:text-gold-300"
-                >
+        <div
+          id="menu-mobile"
+          aria-hidden={!open}
+          className={`mx-auto mt-2 max-h-[calc(100svh-6.5rem)] max-w-6xl overflow-y-auto rounded-3xl border border-cream-300 bg-white p-3 shadow-[0_24px_48px_-24px_rgb(8_38_19/0.35)] transition-all duration-300 xl:hidden ${
+            open ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
+          }`}
+        >
+          <ul>
+            {navigation.map((item) => (
+              <li key={item.label} className="border-b border-cream-300 px-3 py-4 last:border-0">
+                <Link href={item.href ?? "#"} tabIndex={open ? 0 : -1} className="font-display text-xl font-semibold tracking-tight text-green-900">
                   {item.label}
                 </Link>
                 {item.children && (
-                  <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+                  <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
                     {item.children.map((c) => (
                       <li key={c.href + c.label}>
-                        <Link
-                          href={c.href}
-                          tabIndex={open ? 0 : -1}
-                          className="font-serif text-lg text-cream-100/75 hover:text-gold-300"
-                        >
+                        <Link href={c.href} tabIndex={open ? 0 : -1} className="text-sm text-ink-soft hover:text-green-700">
                           {c.label}
                         </Link>
                       </li>
@@ -183,16 +133,13 @@ export function Header() {
               </li>
             ))}
           </ul>
-          <div
-            className={`mt-10 transition-all duration-700 ${open ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
-            style={{ transitionDelay: open ? "620ms" : "0ms" }}
-          >
-            <ButtonLink href="/rejoindre" variant="gold" className="w-full">
+          <div className="p-3 pt-4">
+            <ButtonLink href="/rejoindre" className="w-full">
               Rejoindre le SJB
             </ButtonLink>
           </div>
         </div>
-      </div>
+      </header>
     </>
   );
 }

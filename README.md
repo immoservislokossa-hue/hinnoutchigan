@@ -23,8 +23,8 @@ npm run lint && npm run typecheck
 
 - `app/` : pages publiques (accueil, Le Sénat, organisation, BEN, présidence, sous-groupes, commissions, territoires, actions, actualités, agenda, documents, transparence, rejoindre, engagement, partenaires, opportunités, contact, presse, pages légales).
 - `content/` : tout le contenu éditorial (`site.ts` pour la configuration, `structure.ts` pour les faits issus des statuts et du décret).
-- `components/ui/` : système de design (bouton « Sceau », révélation au scroll, compteur, rayons de soleil, ornements).
-- `app/globals.css` : tokens (couleurs du logo, polices Cinzel / Cormorant Garamond / Inter) et composants CSS.
+- `components/ui/` : système de design (bouton « Verre » teinté, révélation au scroll, compteur, orbites, carte interactive, section épinglée).
+- `app/globals.css` : tokens (couleurs du logo, polices Space Grotesk / Poppins) et composants CSS.
 - `docs/A_COMPLETER.md` : informations manquantes et décisions à valider.
 
 ## Phase suivante

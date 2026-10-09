@@ -28,16 +28,16 @@ export default function OpportunitesPage() {
             <ul className="mt-12 flex flex-wrap gap-3">
               {categories.map((c, i) => (
                 <Reveal as="li" key={c} delay={(i % 5) * 70}>
-                  <span className="block border border-gold-400/70 px-5 py-3 font-display text-[0.7rem] uppercase tracking-[0.2em] text-green-800">{c}</span>
+                  <span className="block border border-cream-300 px-5 py-3 font-display text-xs uppercase tracking-[0.2em] text-green-800">{c}</span>
                 </Reveal>
               ))}
             </ul>
           </div>
           <Reveal>
-            <div className="surface-dark on-dark p-10">
-              <p className="eyebrow on-dark">Être prévenu</p>
-              <h2 className="h-display mt-5 text-2xl text-cream-50">Soyez averti au lancement</h2>
-              <p className="mt-4 text-cream-100/75">Laissez votre adresse e-mail : nous vous écrirons dès l&apos;ouverture du portail.</p>
+            <div className="border-t border-cream-300 p-10">
+              <p className="eyebrow ">Être prévenu</p>
+              <h2 className="h-display mt-5 text-2xl text-green-900">Soyez averti au lancement</h2>
+              <p className="mt-4 text-ink-soft">Laissez votre adresse e-mail : nous vous écrirons dès l&apos;ouverture du portail.</p>
               <NewsletterForm />
             </div>
           </Reveal>

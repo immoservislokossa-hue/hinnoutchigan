@@ -28,7 +28,7 @@ export default function ActionsPage() {
               <Reveal as="li" key={a.slug} delay={(i % 2) * 110}>
                 <article className="card-lux flex h-full flex-col p-10">
                   <div className="flex items-center justify-between gap-4">
-                    <p className="font-display text-[0.64rem] uppercase tracking-[0.28em] text-gold-600">{a.tag}</p>
+                    <p className="font-display text-xs uppercase tracking-[0.1em] text-gold-600">{a.tag}</p>
                     <span className="font-display text-3xl font-semibold text-gold-400/70">{String(i + 1).padStart(2, "0")}</span>
                   </div>
                   <h2 className="h-display mt-5 text-2xl text-green-900">{a.title}</h2>
@@ -42,14 +42,14 @@ export default function ActionsPage() {
           </ul>
         </div>
       </section>
-      <section className="surface-dark on-dark section-y">
+      <section className="border-t border-cream-300 section-y">
         <div className="container-sjb">
-          <SectionHeading dark align="center" eyebrow="Une idée ? Un projet ?" title="Proposez, nous étudions" lede="Les jeunes sont au cœur de nos actions : partagez votre idée ou rejoignez un projet existant." />
+          <SectionHeading align="center" eyebrow="Une idée ? Un projet ?" title="Proposez, nous étudions" lede="Les jeunes sont au cœur de nos actions : partagez votre idée ou rejoignez un projet existant." />
           <Reveal className="mt-12 flex flex-wrap justify-center gap-4">
             <ButtonLink href="/engagement" variant="gold">
               Je veux m&apos;engager
             </ButtonLink>
-            <ButtonLink href="/contact" variant="outline">
+            <ButtonLink href="/contact" variant="outline-dark">
               Nous écrire
             </ButtonLink>
           </Reveal>

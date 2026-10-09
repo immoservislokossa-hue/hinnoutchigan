@@ -27,7 +27,7 @@ export default function ActualitesPage() {
             {sorted.map((n, i) => (
               <Reveal as="li" key={n.slug} delay={(i % 2) * 120}>
                 <Link href={`/actualites/${n.slug}`} className="card-lux group block h-full p-10">
-                  <p className="flex flex-wrap items-center gap-4 font-display text-[0.66rem] uppercase tracking-[0.25em] text-gold-600">
+                  <p className="flex flex-wrap items-center gap-4 font-display text-xs uppercase tracking-[0.1em] text-gold-600">
                     <span>{n.category}</span>
                     <span className="h-px w-8 bg-gold-400" />
                     <time dateTime={n.iso}>{n.date}</time>
@@ -42,7 +42,7 @@ export default function ActualitesPage() {
               </Reveal>
             ))}
           </ul>
-          <Reveal className="mx-auto mt-20 max-w-2xl border border-dashed border-gold-400/70 p-8 text-center">
+          <Reveal className="mx-auto mt-20 max-w-2xl border border-dashed border-cream-300 p-8 text-center">
             <p className="font-serif text-xl text-ink-soft">
               Les prochaines publications du Bureau Exécutif National apparaîtront ici. <Todo what="premiers articles et communiqués" />
             </p>

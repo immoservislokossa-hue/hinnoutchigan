@@ -39,16 +39,16 @@ export default function OrganisationPage() {
         </div>
       </section>
 
-      <section className="surface-dark on-dark section-y">
+      <section className="border-t border-cream-300 section-y">
         <div className="container-sjb">
-          <SectionHeading dark eyebrow="Chaîne de commandement" title="Cinq échelons, un seul cap" lede="Chaque instance rend compte à celle de tutelle, jusqu'au Bureau Exécutif National." />
-          <ol className="mt-16 grid gap-px bg-gold-400/25 md:grid-cols-5">
+          <SectionHeading eyebrow="Chaîne de commandement" title="Cinq échelons, un seul cap" lede="Chaque instance rend compte à celle de tutelle, jusqu'au Bureau Exécutif National." />
+          <ol className="mt-16 grid gap-px bg-cream-300 md:grid-cols-5">
             {chain.map((c, i) => (
-              <Reveal as="li" key={c.level} delay={i * 90} className="bg-green-950 p-8">
-                <p className="font-display text-4xl font-semibold text-gold-300">{c.count}</p>
-                <p className="mt-1 font-display text-[0.62rem] uppercase tracking-[0.25em] text-cream-100/60">{c.posts}</p>
-                <h3 className="h-display mt-6 text-lg text-cream-50">{c.level}</h3>
-                <p className="mt-3 text-sm text-cream-100/70">{c.text}</p>
+              <Reveal as="li" key={c.level} delay={i * 90} className="bg-white p-8">
+                <p className="font-display text-4xl font-semibold text-green-700">{c.count}</p>
+                <p className="mt-1 font-display text-xs uppercase tracking-[0.1em] text-ink-soft">{c.posts}</p>
+                <h3 className="h-display mt-6 text-lg text-green-900">{c.level}</h3>
+                <p className="mt-3 text-sm text-ink-soft">{c.text}</p>
               </Reveal>
             ))}
           </ol>

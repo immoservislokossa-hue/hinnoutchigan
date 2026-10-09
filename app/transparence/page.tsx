@@ -62,11 +62,11 @@ export default function TransparencePage() {
           </ul>
         </div>
       </section>
-      <section className="surface-dark on-dark section-y">
+      <section className="border-t border-cream-300 section-y">
         <div className="container-sjb">
-          <SectionHeading dark eyebrow="Rapports publiés" title="Dernières publications" />
-          <Reveal className="mt-12 border border-dashed border-gold-400/50 p-10 text-center">
-            <p className="font-serif text-2xl text-cream-100/85">
+          <SectionHeading eyebrow="Rapports publiés" title="Dernières publications" />
+          <Reveal className="mt-12 border border-dashed border-cream-300 p-10 text-center">
+            <p className="font-serif text-2xl text-ink-soft">
               <Todo what="rapport général annuel et rapports financiers certifiés" />
             </p>
           </Reveal>

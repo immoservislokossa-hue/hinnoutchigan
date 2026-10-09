@@ -54,7 +54,7 @@ export default function PressePage() {
             <dl className="mt-10 grid grid-cols-2 gap-px bg-cream-300 sm:grid-cols-4">
               {keyFigures.map((f) => (
                 <div key={f.label} className="flex flex-col-reverse bg-cream-50 p-5 text-center">
-                  <dt className="mt-1 font-display text-[0.58rem] uppercase tracking-[0.2em] text-ink-mute">{f.label}</dt>
+                  <dt className="mt-1 font-display text-xs uppercase tracking-[0.2em] text-ink-mute">{f.label}</dt>
                   <dd className="font-display text-3xl font-semibold text-green-800">{f.value}</dd>
                 </div>
               ))}
@@ -68,7 +68,7 @@ export default function PressePage() {
           </div>
         </div>
       </section>
-      <section className="section-y bg-cream-100">
+      <section className="section-y border-t border-cream-300">
         <div className="container-sjb grid gap-16 lg:grid-cols-[1fr_1.3fr] lg:gap-24">
           <SectionHeading eyebrow="Demande média" title="Interview, accréditation, information" />
           <Reveal>

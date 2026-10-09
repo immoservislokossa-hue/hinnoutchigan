@@ -21,12 +21,12 @@ export function SectionHeading({
     <div className={`${center ? "mx-auto text-center" : ""} max-w-3xl`}>
       {eyebrow && (
         <Reveal>
-          <span className={`eyebrow ${dark ? "on-dark" : ""}`}>{eyebrow}</span>
+          <span className={`eyebrow ${dark ? "" : ""}`}>{eyebrow}</span>
         </Reveal>
       )}
       <Reveal delay={90}>
         <Tag
-          className={`h-display mt-5 text-3xl sm:text-4xl lg:text-[2.85rem] ${dark ? "text-cream-50" : "text-green-900"}`}
+          className={`h-display mt-5 text-[2rem] sm:text-5xl lg:text-[3.4rem] ${dark ? "text-green-900" : "text-green-900"}`}
         >
           {title}
         </Tag>
