@@ -59,8 +59,4 @@ export async function requireRoles(roles: AppRole[], fallback = "/admin") {
   return ctx;
 }
 
-/** N'autorise que les redirections internes (anti « open redirect »). */
-export function safeNext(value: string | null | undefined, fallback = "/espace") {
-  if (!value || !value.startsWith("/") || value.startsWith("//") || value.includes("\\")) return fallback;
-  return value;
-}
+export { safeNext } from "@/lib/safe-next";

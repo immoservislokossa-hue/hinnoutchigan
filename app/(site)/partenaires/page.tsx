@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Todo } from "@/components/ui/Todo";
 import { PartnerForm } from "@/components/forms/forms";
+import { getPartners } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Partenaires · Devenir partenaire",
@@ -18,7 +19,8 @@ const principles = [
   ["La neutralité partisane", "Le SJB ne s'associe à aucun parti ni à aucun candidat politique."],
 ];
 
-export default function PartenairesPage() {
+export default async function PartenairesPage() {
+  const partners = await getPartners();
   return (
     <>
       <PageHero
@@ -31,11 +33,40 @@ export default function PartenairesPage() {
       <section className="section-y">
         <div className="container-sjb">
           <SectionHeading eyebrow="Ils nous font confiance" title="Nos partenaires" />
-          <Reveal className="mt-12 border border-dashed border-cream-300 bg-cream-100 p-12 text-center">
-            <p className="font-serif text-2xl text-ink-soft">
-              <Todo what="logos et noms des partenaires conventionnés" />
-            </p>
-          </Reveal>
+          {partners.length === 0 ? (
+            <Reveal className="mt-12 rounded-3xl border border-dashed border-gold-500 bg-cream-100 p-10 text-center">
+              <p className="text-lg text-ink-soft">
+                <Todo what="logos et noms des partenaires conventionnés" />
+              </p>
+            </Reveal>
+          ) : (
+            <ul className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+              {partners.map((pt) => {
+                const inner = (
+                  <>
+                    {pt.logo ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={pt.logo} alt={pt.name} loading="lazy" className="max-h-16 w-auto max-w-full object-contain" />
+                    ) : (
+                      <span className="font-display text-lg font-semibold text-green-900">{pt.name}</span>
+                    )}
+                    <span className="mt-3 text-xs text-ink-mute">{pt.kind}</span>
+                  </>
+                );
+                return (
+                  <li key={pt.id}>
+                    {pt.url ? (
+                      <a href={pt.url} target="_blank" rel="noopener noreferrer" className="card-lux flex h-full min-h-32 flex-col items-center justify-center p-5 text-center">
+                        {inner}
+                      </a>
+                    ) : (
+                      <div className="card-lux flex h-full min-h-32 flex-col items-center justify-center p-5 text-center">{inner}</div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
       </section>
 

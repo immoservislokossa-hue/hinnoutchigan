@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
 import { Todo } from "@/components/ui/Todo";
-import { documents } from "@/content/structure";
+import { getPublicDocuments } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Documents officiels · Statuts, décrets, délibérations",
@@ -12,7 +12,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/documents" },
 };
 
-export default function DocumentsPage() {
+export default async function DocumentsPage() {
+  const documents = await getPublicDocuments();
   return (
     <>
       <PageHero
@@ -29,12 +30,10 @@ export default function DocumentsPage() {
               <Reveal as="li" key={d.slug} delay={i * 90} className="grid gap-6 py-10 md:grid-cols-[1fr_auto] md:items-center">
                 <div>
                   <p className="font-display text-xs uppercase tracking-[0.1em] text-gold-600">
-                    {d.kind} · {d.date}
+                    {[d.kind, d.date].filter(Boolean).join(" · ")}
                   </p>
                   <h2 className="h-display mt-3 text-xl text-green-900 sm:text-2xl">{d.title}</h2>
-                  <p className="mt-2 text-ink-mute">
-                    {d.ref} · PDF · {d.size}
-                  </p>
+                  {d.ref && <p className="mt-2 text-ink-mute">{d.ref}</p>}
                 </div>
                 <ButtonLink href={d.file} variant="outline-dark" small download>
                   Télécharger

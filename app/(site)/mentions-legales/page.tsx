@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { Todo } from "@/components/ui/Todo";
 import { site } from "@/content/site";
+import { getSiteSettings } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Mentions légales",
@@ -10,7 +11,8 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function MentionsPage() {
+export default async function MentionsPage() {
+  const cfg = await getSiteSettings();
   return (
     <>
       <PageHero eyebrow="Informations légales" crumbs={[{ label: "Mentions légales" }]} title="Mentions légales" />
@@ -20,21 +22,21 @@ export default function MentionsPage() {
             <h2 className="h-display mb-4 text-2xl text-green-900">Éditeur du site</h2>
             <p>
               Sénat des Jeunes du Bénin (SJB), association de droit béninois à but non lucratif, régie par la {site.legalRef}. Siège :{" "}
-              {site.seat}. Adresse : {site.contact.address ?? <Todo what="adresse physique" />}
+              {site.seat}. Adresse : {cfg.contact.address ?? <Todo what="adresse physique" />}
             </p>
             <p>
-              Identifiant au Registre électronique des Associations et Fondations : <Todo what="numéro d'enregistrement" />
+              Identifiant au Registre électronique des Associations et Fondations : {cfg.legal.registry_number ?? <Todo what="numéro d'enregistrement" />}
             </p>
             <p>
-              Directeur de la publication : <Todo what="nom du directeur de la publication" />
+              Directeur de la publication : {cfg.legal.publication_director ?? <Todo what="nom du directeur de la publication" />}
             </p>
             <p>
-              Contact : {site.contact.email ?? <Todo what="courriel officiel" />}
+              Contact : {cfg.contact.email ?? <Todo what="courriel officiel" />}
             </p>
 
             <h2 className="h-display mb-4 mt-12 text-2xl text-green-900">Hébergement</h2>
             <p>
-              <Todo what="nom et adresse de l'hébergeur" />
+              {cfg.legal.host ?? <Todo what="nom et adresse de l'hébergeur" />}
             </p>
 
             <h2 className="h-display mb-4 mt-12 text-2xl text-green-900">Conception et réalisation</h2>

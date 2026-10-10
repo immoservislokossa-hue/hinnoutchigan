@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { Todo } from "@/components/ui/Todo";
-import { news } from "@/content/structure";
+import { getNews } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Actualités & communiqués",
@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/actualites" },
 };
 
-export default function ActualitesPage() {
-  const sorted = [...news].sort((a, b) => b.iso.localeCompare(a.iso));
+export default async function ActualitesPage() {
+  const sorted = await getNews();
   return (
     <>
       <PageHero

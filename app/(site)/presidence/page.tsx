@@ -6,6 +6,7 @@ import { Portrait } from "@/components/ui/Portrait";
 import { Todo } from "@/components/ui/Todo";
 import { ButtonLink } from "@/components/ui/Button";
 import { benPosts } from "@/content/structure";
+import { getSiteSettings } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Présidence",
@@ -15,7 +16,8 @@ export const metadata: Metadata = {
 
 const president = benPosts[0];
 
-export default function PresidencePage() {
+export default async function PresidencePage() {
+  const { president: pr } = await getSiteSettings();
   return (
     <>
       <PageHero
@@ -28,11 +30,11 @@ export default function PresidencePage() {
       <section className="section-y">
         <div className="container-sjb grid gap-16 lg:grid-cols-[22rem_1fr] lg:gap-24">
           <Reveal dir="left">
-            <Portrait alt="Portrait officiel du Président du Sénat des Jeunes du Bénin" />
+            <Portrait photo={pr.photo} alt="Portrait officiel du Président du Sénat des Jeunes du Bénin" />
             <div className="mt-7">
               <p className="font-display text-xs uppercase tracking-[0.1em] text-gold-600">Président du Bureau Exécutif National</p>
               <p className="h-display mt-3 text-2xl text-green-900">
-                <Todo what="prénoms et nom du Président" />
+                {pr.name ?? <Todo what="prénoms et nom du Président" />}
               </p>
             </div>
           </Reveal>
@@ -41,21 +43,19 @@ export default function PresidencePage() {
             <SectionHeading eyebrow="Mot du Président" title="Un engagement au service de la jeunesse" />
             <Reveal delay={150} className="mt-10 border-l-2 border-gold-500 pl-7">
               <p className="font-serif text-2xl italic leading-relaxed text-ink-soft">
-                <Todo what="mot du Président (150 à 300 mots)" />
+                {pr.message ?? <Todo what="mot du Président (150 à 300 mots)" />}
               </p>
             </Reveal>
             <div className="mt-16 grid gap-10 sm:grid-cols-2">
               {[
-                ["Vision pour la jeunesse", "vision du Président"],
-                ["Priorités du mandat", "priorités du mandat"],
-                ["Actions réalisées", "actions réalisées"],
-                ["Engagements", "engagements"],
-              ].map(([t, w], i) => (
+                ["Vision pour la jeunesse", "vision du Président", pr.vision],
+                ["Priorités du mandat", "priorités du mandat", pr.priorities],
+                ["Actions réalisées", "actions réalisées", pr.actions],
+                ["Engagements", "engagements", pr.commitments],
+              ].map(([t, w, v], i) => (
                 <Reveal key={t} delay={(i % 2) * 100}>
                   <h3 className="h-display border-b border-cream-300 pb-3 text-lg text-green-900">{t}</h3>
-                  <p className="mt-4">
-                    <Todo what={w} />
-                  </p>
+                  <p className="mt-4 whitespace-pre-line text-ink-soft">{v ?? <Todo what={w as string} />}</p>
                 </Reveal>
               ))}
             </div>

@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Todo } from "@/components/ui/Todo";
 import { ButtonLink } from "@/components/ui/Button";
 import { departments, teamPosts } from "@/content/structure";
+import { getEvents, getLeadership, getNews, normalizePost } from "@/lib/data";
 
 type Params = { slug: string };
 
@@ -30,6 +31,12 @@ export default async function DepartmentPage({ params }: { params: Promise<Param
   const index = departments.findIndex((x) => x.slug === slug);
   if (index === -1) notFound();
   const d = departments[index];
+  const [leaders, deptNews, deptEvents] = await Promise.all([
+    getLeadership(`dept:${d.slug}`),
+    getNews({ department: d.slug, limit: 4 }),
+    getEvents({ department: d.slug, upcomingOnly: true }),
+  ]);
+  const byPost = new Map(leaders.map((l) => [normalizePost(l.post), l]));
   const prev = departments[(index + departments.length - 1) % departments.length];
   const next = departments[(index + 1) % departments.length];
 
@@ -52,16 +59,21 @@ export default async function DepartmentPage({ params }: { params: Promise<Param
                 auprès du Préfet, des responsables des sections communales et des partenaires, et rend compte chaque mois à la
                 coordination régionale.
               </p>
-              <p>
-                <Todo what={`noms des responsables du département ${d.name}`} />
-              </p>
+              {leaders.length === 0 && (
+                <p>
+                  <Todo what={`noms des responsables du département ${d.name}`} />
+                </p>
+              )}
             </Reveal>
           </div>
           <ol className="grid gap-px border border-cream-300 bg-cream-300 sm:grid-cols-2">
             {teamPosts.map((p, i) => (
               <Reveal as="li" key={p} delay={(i % 2) * 70} className="flex items-start gap-4 bg-cream-50 p-5">
-                <span className="font-display text-sm font-semibold text-gold-500">{String(i + 1).padStart(2, "0")}</span>
-                <span className="font-serif text-lg leading-snug text-green-900">{p}</span>
+                <span className="font-display text-sm font-semibold text-gold-600">{String(i + 1).padStart(2, "0")}</span>
+                <span>
+                  <span className="block font-semibold leading-snug text-green-900">{p}</span>
+                  {byPost.get(normalizePost(p)) && <span className="mt-0.5 block text-sm text-ink-soft">{byPost.get(normalizePost(p))?.name}</span>}
+                </span>
               </Reveal>
             ))}
           </ol>
@@ -86,17 +98,47 @@ export default async function DepartmentPage({ params }: { params: Promise<Param
 
       <section className="section-y">
         <div className="container-sjb">
-          <div className="grid gap-12 md:grid-cols-2">
-            {["Actualités du département", "Activités et projets locaux"].map((t) => (
-              <Reveal key={t}>
-                <div className="card-lux p-9">
-                  <h2 className="h-display text-xl text-green-900">{t}</h2>
+          <div className="grid gap-5 md:grid-cols-2">
+            <Reveal>
+              <div className="card-lux h-full p-6 sm:p-9">
+                <h2 className="h-display text-xl text-green-900">Actualités du département</h2>
+                {deptNews.length ? (
+                  <ul className="mt-5 space-y-4">
+                    {deptNews.map((n) => (
+                      <li key={n.slug}>
+                        <Link href={`/actualites/${n.slug}`} className="link-arrow">
+                          {n.title}
+                        </Link>
+                        <p className="mt-1 text-sm text-ink-mute">{n.date}</p>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
                   <p className="mt-4">
-                    <Todo what={`contenu du département ${d.name}`} />
+                    <Todo what={`actualités du département ${d.name}`} />
                   </p>
-                </div>
-              </Reveal>
-            ))}
+                )}
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              <div className="card-lux h-full p-6 sm:p-9">
+                <h2 className="h-display text-xl text-green-900">Activités à venir</h2>
+                {deptEvents.length ? (
+                  <ul className="mt-5 space-y-4">
+                    {deptEvents.map((e) => (
+                      <li key={e.id}>
+                        <p className="font-semibold text-green-900">{e.title}</p>
+                        <p className="text-sm capitalize text-ink-mute">{e.when}</p>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="mt-4">
+                    <Todo what={`activités du département ${d.name}`} />
+                  </p>
+                )}
+              </div>
+            </Reveal>
           </div>
 
           <nav aria-label="Départements voisins" className="mt-20 flex flex-wrap items-center justify-between gap-6 border-t border-cream-300 pt-10">

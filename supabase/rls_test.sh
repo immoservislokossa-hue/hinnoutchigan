@@ -1,5 +1,10 @@
 #!/bin/bash
-P="psql -h /tmp -p 54329 -U pgtest -d sjbtest -X -t -A"
+# Tests des politiques RLS. Usage :
+#   PGHOST=... PGPORT=... PGUSER=... PGDATABASE=sjb_test ./supabase/rls_test.sh
+# La base doit contenir stub_supabase.sql (si Postgres nu), les migrations et seed.sql.
+# Ne JAMAIS lancer sur une base de production : le script vide des tables.
+HERE="$(cd "$(dirname "$0")" && pwd)"
+P="psql -X -t -A"
 ADMIN=00000000-0000-0000-0000-000000000001; EDITOR=00000000-0000-0000-0000-000000000002; BEN=00000000-0000-0000-0000-000000000003
 DEPT=00000000-0000-0000-0000-000000000004; DEPT2=00000000-0000-0000-0000-000000000005; MEMBER=00000000-0000-0000-0000-000000000006; SUSP=00000000-0000-0000-0000-000000000007
 $P -v ON_ERROR_STOP=1 <<SQL
@@ -14,7 +19,7 @@ update public.profiles set role='member', department_slug='plateau' where id='$M
 update public.profiles set role='editor', status='suspended' where id='$SUSP';
 insert into public.documents (title,file_path,visibility) values ('pub','/a.pdf','public'),('mem','a/b.pdf','members'),('ben','a/c.pdf','ben');
 SQL
-$P -v ON_ERROR_STOP=1 -f /home/user/hinnoutchigan/supabase/seed.sql >/dev/null
+$P -v ON_ERROR_STOP=1 -f "$HERE/seed.sql" >/dev/null
 pass=0; fail=0
 # usage: t "description" "expected" ROLE USERID "sql"
 t() { desc="$1"; exp="$2"; role="$3"; uid="$4"; sql="$5"
@@ -77,6 +82,7 @@ t "coord Plateau voit le rapport de son département" "1" authenticated $DEPT "s
 t "coord Borgou ne voit pas le rapport du Plateau" "0" authenticated $DEPT2 "select count(*) from reports"
 t "coord Plateau commente un rapport" "UPDATE 1" authenticated $DEPT "update reports set feedback='ok', status='reviewed' where author_id='$MEMBER'"
 t "coord Plateau gère son équipe publique" "INSERT 0 1" authenticated $DEPT "insert into leadership(scope,post,full_name) values ('dept:plateau','Président','A B')"
+t "coord Plateau lit son équipe non publiée (INSERT...RETURNING)" "1" authenticated $DEPT "select count(*) from leadership where scope='dept:plateau'"
 t "coord Plateau ne gère pas l'équipe du Borgou" "row-level security" authenticated $DEPT "insert into leadership(scope,post,full_name) values ('dept:borgou','Président','A B')"
 t "coord Plateau ne lit pas les demandes" "0" authenticated $DEPT "select count(*) from form_submissions"
 

@@ -8,7 +8,8 @@ import { Orbits } from "@/components/ui/Orbits";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { InteractiveMap } from "@/components/home/InteractiveMap";
 import { ChainScroller } from "@/components/home/ChainScroller";
-import { actions, keyFigures, news, pillars, subGroups } from "@/content/structure";
+import { actions, keyFigures, pillars, subGroups } from "@/content/structure";
+import { getNews } from "@/lib/data";
 import { site } from "@/content/site";
 
 const actionIcons = {
@@ -24,7 +25,8 @@ const pillarIcons = [Users, Sprout, Globe];
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 
-export default function HomePage() {
+export default async function HomePage() {
+  const news = await getNews({ limit: 2 });
   return (
     <>
       {/* ---------- Hero centré ---------- */}

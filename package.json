@@ -8,7 +8,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning --test tests/*.test.mjs",
+    "seed:generate": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/generate-seed.mjs",
+    "check": "npm run typecheck && npm run lint && npm test"
   },
   "engines": {
     "node": ">=20"

@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { footerColumns, site } from "@/content/site";
+import { getSiteSettings } from "@/lib/data";
 import { Logo } from "@/components/ui/Logo";
 import { Todo } from "@/components/ui/Todo";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
 
-export function Footer() {
-  const socials = Object.entries(site.social).filter(([, v]) => v) as [string, string][];
+export async function Footer() {
+  const cfg = await getSiteSettings();
+  const socials = Object.entries(cfg.social).filter(([, v]) => v) as [string, string][];
   return (
     <footer className="relative overflow-hidden border-t border-cream-300 bg-white text-ink">
       <span
@@ -63,20 +65,20 @@ export function Footer() {
           <div>
             <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-green-700">Siège</p>
             <p className="mt-3">{site.seat}</p>
-            <p className="mt-1">{site.contact.address ?? <Todo what="adresse physique" />}</p>
+            <p className="mt-1">{cfg.contact.address ?? <Todo what="adresse physique" />}</p>
           </div>
           <div>
             <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-green-700">Contact</p>
             <p className="mt-3">
-              {site.contact.email ? (
-                <a href={`mailto:${site.contact.email}`} className="hover:text-green-900">
-                  {site.contact.email}
+              {cfg.contact.email ? (
+                <a href={`mailto:${cfg.contact.email}`} className="hover:text-green-900">
+                  {cfg.contact.email}
                 </a>
               ) : (
                 <Todo what="courriel officiel" />
               )}
             </p>
-            <p className="mt-1">{site.contact.phones.length ? site.contact.phones.join(" · ") : <Todo what="téléphone" />}</p>
+            <p className="mt-1">{cfg.contact.phones.length ? cfg.contact.phones.join(" · ") : <Todo what="téléphone" />}</p>
           </div>
           <div>
             <p className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-green-700">Réseaux</p>

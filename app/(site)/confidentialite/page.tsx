@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { Todo } from "@/components/ui/Todo";
 import { site } from "@/content/site";
+import { getSiteSettings } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
@@ -9,7 +10,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/confidentialite" },
 };
 
-export default function ConfidentialitePage() {
+export default async function ConfidentialitePage() {
+  const cfg = await getSiteSettings();
   return (
     <>
       <PageHero eyebrow="Données personnelles" crumbs={[{ label: "Confidentialité" }]} title="Politique de confidentialité" />
@@ -19,7 +21,7 @@ export default function ConfidentialitePage() {
             <h2 className="h-display mb-4 text-2xl text-green-900">Responsable du traitement</h2>
             <p>
               Le Sénat des Jeunes du Bénin, dont le siège est à {site.seat}, est responsable des données collectées sur ce site. Contact :{" "}
-              {site.contact.email ?? <Todo what="courriel de contact données personnelles" />}
+              {cfg.contact.email ?? <Todo what="courriel de contact données personnelles" />}
             </p>
 
             <h2 className="h-display mb-4 mt-12 text-2xl text-green-900">Données collectées et finalités</h2>
@@ -36,7 +38,7 @@ export default function ConfidentialitePage() {
             <h2 className="h-display mb-4 mt-12 text-2xl text-green-900">Destinataires et durée de conservation</h2>
             <p>
               Les données sont accessibles aux seuls responsables habilités du SJB. Elles ne sont ni vendues ni cédées. Durée de
-              conservation : <Todo what="durée de conservation par type de demande" />
+              conservation : {cfg.legal.retention ?? <Todo what="durée de conservation par type de demande" />}
             </p>
 
             <h2 className="h-display mb-4 mt-12 text-2xl text-green-900">Vos droits</h2>

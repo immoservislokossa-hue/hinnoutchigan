@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Todo } from "@/components/ui/Todo";
 import { ContactForm } from "@/components/forms/forms";
 import { site } from "@/content/site";
+import { getSiteSettings } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const cfg = await getSiteSettings();
   return (
     <>
       <PageHero
@@ -28,9 +30,9 @@ export default function ContactPage() {
             <dl className="mt-12 space-y-8">
               {[
                 ["Siège", <>{site.seat}</>],
-                ["Adresse", site.contact.address ?? <Todo what="adresse physique" />],
-                ["Courriel", site.contact.email ? <a className="underline decoration-gold-400 underline-offset-4" href={`mailto:${site.contact.email}`}>{site.contact.email}</a> : <Todo what="courriel officiel" />],
-                ["Téléphone", site.contact.phones.length ? site.contact.phones.join(" · ") : <Todo what="numéros officiels" />],
+                ["Adresse", cfg.contact.address ?? <Todo what="adresse physique" />],
+                ["Courriel", cfg.contact.email ? <a className="underline decoration-gold-400 underline-offset-4" href={`mailto:${cfg.contact.email}`}>{cfg.contact.email}</a> : <Todo what="courriel officiel" />],
+                ["Téléphone", cfg.contact.phones.length ? cfg.contact.phones.join(" · ") : <Todo what="numéros officiels" />],
               ].map(([k, v], i) => (
                 <Reveal key={String(k)} delay={i * 80}>
                   <dt className="font-display text-xs uppercase tracking-[0.1em] text-gold-600">{k}</dt>

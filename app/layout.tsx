@@ -6,9 +6,6 @@ import "@fontsource/poppins/latin-700.css";
 import "@fontsource/poppins/latin-400-italic.css";
 import "@fontsource-variable/space-grotesk/wght.css";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -68,10 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>
       <body>
-        <ScrollProgress />
-        <Header />
-        <main id="contenu">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

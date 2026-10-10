@@ -7,6 +7,7 @@ import { Todo } from "@/components/ui/Todo";
 import { PressForm } from "@/components/forms/forms";
 import { keyFigures } from "@/content/structure";
 import { site } from "@/content/site";
+import { getSiteSettings } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Presse · Kit média",
@@ -14,7 +15,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/presse" },
 };
 
-export default function PressePage() {
+export default async function PressePage() {
+  const cfg = await getSiteSettings();
   return (
     <>
       <PageHero
@@ -60,7 +62,7 @@ export default function PressePage() {
               ))}
             </dl>
             <p className="mt-10 text-ink-soft">
-              Contact presse : <Todo what="nom, courriel et téléphone du responsable communication" />
+              Contact presse : {cfg.press.contact ?? <Todo what="nom, courriel et téléphone du responsable communication" />}
             </p>
             <p className="mt-3 text-sm text-ink-mute">
               Les prises de parole publiques au nom du SJB sont réservées aux responsables de la communication habilités.

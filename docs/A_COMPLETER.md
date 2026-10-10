@@ -1,5 +1,10 @@
 # Informations à compléter
 
+> Une fois Supabase relié, la plupart de ces informations se saisissent depuis le back-office :
+> **/admin/parametres** (coordonnées, réseaux, Présidence, presse, mentions légales),
+> **/admin/equipes** (noms et photos du BEN et des coordinations), **/admin/actualites**, **/admin/evenements**,
+> **/admin/documents** et **/admin/partenaires**. Il n'y a plus besoin de modifier le code.
+
 Chaque information manquante est affichée sur le site par un marqueur pointillé **« À compléter »** (composant `components/ui/Todo.tsx`).
 Pour retrouver tous les marqueurs : `grep -rn "<Todo" app components`.
 
@@ -17,7 +22,7 @@ Pour retrouver tous les marqueurs : `grep -rn "<Todo" app components`.
 - **Identité** : prénoms et noms des 7 membres du BEN + photos officielles (`Portrait`).
 - **Présidence** : mot du Président, vision, priorités, actions réalisées, engagements.
 - **Départements** : responsables de chaque coordination, actualités et activités locales (12 pages).
-- **Coordonnées** (`content/site.ts`) : courriel, téléphones, adresse physique, réseaux sociaux.
+- **Coordonnées** (`/admin/parametres`) : courriel, téléphones, adresse physique, réseaux sociaux.
 - **Actualités, agenda, rapports** : premiers articles, prochaines dates, rapport annuel et rapports financiers certifiés.
 - **Documents** : règlement intérieur, registre des délibérations, rapports d'activités.
 - **Partenaires** : logos et noms des partenaires conventionnés.
@@ -29,5 +34,5 @@ Pour retrouver tous les marqueurs : `grep -rn "<Todo" app components`.
 - Les statuts et le décret n°002-08-2026 sont publiés dans `public/documents/` : retirer ce qui ne doit pas être public.
 - Le décret mentionne des numéros de téléphone dans son en-tête ; ils n'ont pas été repris dans `content/site.ts`.
 - La page **Opportunités** est volontairement un espace réservé (module à venir).
-- Les formulaires ne transmettent rien tant que `NEXT_PUBLIC_FORMS_ENDPOINT` n'est pas défini ; l'interface l'indique honnêtement aux visiteurs.
-- Le **back-office** et l'**espace membres** (`/connexion`) sont laissés pour la phase suivante.
+- Les formulaires ne transmettent rien tant que Supabase n'est pas relié (`SUPABASE_SERVICE_ROLE_KEY`) ; l'interface l'indique honnêtement aux visiteurs.
+- Le **back-office** (`/admin`) et l'**espace membre** (`/espace`) sont livrés : voir `docs/DEPLOIEMENT.md`.

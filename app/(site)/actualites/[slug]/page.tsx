@@ -4,17 +4,18 @@ import { notFound } from "next/navigation";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
-import { news } from "@/content/structure";
+import { getNews, getNewsBySlug } from "@/lib/data";
 
 type Params = { slug: string };
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const news = await getNews();
   return news.map((n) => ({ slug: n.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
-  const n = news.find((x) => x.slug === slug);
+  const n = await getNewsBySlug(slug);
   if (!n) return {};
   return {
     title: n.title,
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 export default async function NewsDetailPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
-  const n = news.find((x) => x.slug === slug);
+  const n = await getNewsBySlug(slug);
   if (!n) notFound();
 
   const jsonLd = {

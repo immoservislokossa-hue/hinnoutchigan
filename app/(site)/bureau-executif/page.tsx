@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Portrait } from "@/components/ui/Portrait";
 import { Todo } from "@/components/ui/Todo";
 import { benPosts } from "@/content/structure";
+import { getLeadership, normalizePost } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Bureau Exécutif National",
@@ -13,7 +14,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/bureau-executif" },
 };
 
-export default function BenPage() {
+export default async function BenPage() {
+  const leaders = await getLeadership("ben");
+  const byPost = new Map(leaders.map((l) => [normalizePost(l.post), l]));
   return (
     <>
       <PageHero
@@ -26,15 +29,17 @@ export default function BenPage() {
       <section className="section-y">
         <div className="container-sjb">
           <ul className="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
-            {benPosts.map((p, i) => (
+            {benPosts.map((p, i) => {
+              const leader = byPost.get(normalizePost(p.title));
+              return (
               <Reveal as="li" key={p.slug} delay={(i % 3) * 110} className={i === 0 ? "lg:col-span-3" : ""}>
                 <article className={i === 0 ? "grid gap-10 md:grid-cols-[18rem_1fr] md:items-center" : ""}>
-                  <Portrait alt={`Portrait du ou de la ${p.title}`} className={i === 0 ? "max-w-xs" : ""} />
+                  <Portrait photo={leader?.photo} alt={`Portrait du ou de la ${p.title}`} className={i === 0 ? "max-w-xs" : ""} />
                   <div className={i === 0 ? "" : "mt-7"}>
                     <p className="font-display text-xs uppercase tracking-[0.1em] text-gold-600">{p.origin}</p>
                     <h2 className="h-display mt-3 text-2xl text-green-900">{p.title}</h2>
                     <p className="mt-2 font-serif text-xl italic text-ink-mute">
-                      <Todo what="prénoms et nom" />
+                      {leader?.name ?? <Todo what="prénoms et nom" />}
                     </p>
                     <ul className="mt-5 space-y-2 text-[0.97rem] text-ink-soft">
                       {p.duties.map((d) => (
@@ -47,7 +52,8 @@ export default function BenPage() {
                   </div>
                 </article>
               </Reveal>
-            ))}
+              );
+            })}
           </ul>
         </div>
       </section>

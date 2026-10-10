@@ -201,7 +201,10 @@ create policy partners_write on public.partners for all to authenticated
   using (public.is_staff()) with check (public.is_staff());
 
 -- Équipes publiques
-create policy leadership_read on public.leadership for select to anon, authenticated using (published or public.is_staff());
+create policy leadership_read on public.leadership for select to anon, authenticated using (
+  published or public.is_staff()
+  or (public.my_role() = 'coord_dept' and scope = 'dept:' || public.my_department())
+);
 create policy leadership_write on public.leadership for all to authenticated
   using (public.is_leadership()
          or (public.my_role() = 'coord_dept' and scope = 'dept:' || public.my_department()))
