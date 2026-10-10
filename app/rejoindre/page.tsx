@@ -87,23 +87,45 @@ export default function RejoindrePage() {
 
           <Reveal>
             <h3 className="font-display text-xs uppercase tracking-[0.1em] text-green-700">Droits d&apos;adhésion et cotisations (FCFA)</h3>
-            <div className="mt-6 overflow-x-auto">
+            {/* Mobile : une carte par tranche d'âge */}
+            <ul className="mt-6 space-y-3 md:hidden">
+              {feeTable.map((r) => (
+                <li key={r.ages} className="rounded-2xl border border-cream-300 bg-white p-5">
+                  <p className="font-display text-lg font-semibold text-green-900">{r.ages}</p>
+                  <p className="text-sm text-ink-mute">{r.group}</p>
+                  <dl className="mt-4 grid grid-cols-3 gap-2 text-center">
+                    {[
+                      ["Adhésion", r.join],
+                      ["Mensuelle", r.monthly],
+                      ["Annuelle", r.yearly],
+                    ].map(([k, v]) => (
+                      <div key={k} className="rounded-xl bg-green-50 px-1 py-3">
+                        <dt className="text-xs text-ink-mute">{k}</dt>
+                        <dd className="mt-1 font-display text-base font-semibold text-green-900">{v}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </li>
+              ))}
+            </ul>
+            {/* Tablette et bureau : tableau */}
+            <div className="mt-6 hidden overflow-x-auto md:block">
               <table className="w-full min-w-[34rem] border-collapse text-left">
                 <caption className="sr-only">Barème statutaire des droits d&apos;adhésion et cotisations par tranche d&apos;âge</caption>
                 <thead>
-                  <tr className="border-b border-cream-300 font-display text-xs uppercase tracking-[0.1em] text-green-700">
-                    <th scope="col" className="py-4 pr-4 font-semibold">Tranche d&apos;âge</th>
-                    <th scope="col" className="py-4 pr-4 font-semibold">Groupe</th>
-                    <th scope="col" className="py-4 pr-4 text-right font-semibold">Adhésion</th>
-                    <th scope="col" className="py-4 pr-4 text-right font-semibold">Mensuelle</th>
-                    <th scope="col" className="py-4 text-right font-semibold">Annuelle</th>
+                  <tr className="border-b border-cream-300 text-sm text-ink-mute">
+                    <th scope="col" className="py-4 pr-4 font-medium">Tranche d&apos;âge</th>
+                    <th scope="col" className="py-4 pr-4 font-medium">Groupe</th>
+                    <th scope="col" className="py-4 pr-4 text-right font-medium">Adhésion</th>
+                    <th scope="col" className="py-4 pr-4 text-right font-medium">Mensuelle</th>
+                    <th scope="col" className="py-4 text-right font-medium">Annuelle</th>
                   </tr>
                 </thead>
                 <tbody>
                   {feeTable.map((r) => (
-                    <tr key={r.ages} className="border-b border-cream-300 text-ink-soft">
-                      <th scope="row" className="py-4 pr-4 font-serif text-lg font-medium">{r.ages}</th>
-                      <td className="py-4 pr-4 text-sm text-ink-soft">{r.group}</td>
+                    <tr key={r.ages} className="border-b border-cream-300">
+                      <th scope="row" className="py-4 pr-4 font-display text-lg font-semibold text-green-900">{r.ages}</th>
+                      <td className="py-4 pr-4 text-sm text-ink-mute">{r.group}</td>
                       <td className="py-4 pr-4 text-right tabular-nums">{r.join}</td>
                       <td className="py-4 pr-4 text-right tabular-nums">{r.monthly}</td>
                       <td className="py-4 text-right tabular-nums">{r.yearly}</td>

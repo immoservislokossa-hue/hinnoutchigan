@@ -29,17 +29,17 @@ export default function HomePage() {
     <>
       {/* ---------- Hero centré ---------- */}
       <section className="relative flex min-h-[100svh] flex-col overflow-hidden bg-white pt-[var(--header-h)]">
-        <Orbits className="left-1/2 top-[46%] h-0 w-0" scale={1.15} />
+        <Orbits className="left-1/2 top-[46%] h-0 w-0" scale={0.9} />
         <div className="container-sjb relative flex flex-1 flex-col items-center justify-center py-16 text-center">
           <span
-            className="hero-rise inline-flex items-center gap-2.5 rounded-full border border-cream-300 bg-white px-4 py-1.5 text-sm font-medium text-green-800 shadow-sm"
+            className="hero-rise inline-flex max-w-full items-center gap-2.5 rounded-full border border-cream-300 bg-white px-4 py-1.5 text-center text-[0.8rem] font-medium leading-snug text-green-800 shadow-sm sm:text-sm"
             style={d(0)}
           >
             <span aria-hidden="true" className="h-2 w-2 rounded-full bg-gold-400" />
             République du Bénin · Association de jeunesse
           </span>
 
-          <h1 className="h-display mt-9 text-[clamp(3rem,9vw,7.25rem)] leading-[0.98] text-green-900">
+          <h1 className="h-display mt-9 text-[clamp(2.25rem,10.5vw,7.25rem)] leading-[1] text-green-900">
             <span className="mask-line">
               <span style={d(120)}>Toujours là,</span>
             </span>
@@ -57,7 +57,7 @@ export default function HomePage() {
             responsabilités pour chaque jeune qui veut servir son pays.
           </p>
 
-          <div className="hero-rise mt-10 flex flex-wrap items-center justify-center gap-4" style={d(680)}>
+          <div className="hero-rise mt-10 flex w-full max-w-sm flex-col items-stretch gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:items-center sm:justify-center sm:gap-4" style={d(680)}>
             <ButtonLink href="/rejoindre" variant="gold">
               Rejoindre le SJB
             </ButtonLink>
@@ -111,7 +111,7 @@ export default function HomePage() {
           <div className="mt-16 grid gap-5 md:grid-cols-3">
             <Reveal className="md:col-span-2">
               <div className="flex h-full flex-col justify-between rounded-3xl border border-cream-300 bg-green-50 p-9 sm:p-12">
-                <p className="font-display text-3xl font-medium leading-snug tracking-tight text-green-900 sm:text-4xl">
+                <p className="font-display text-[1.4rem] font-medium leading-snug tracking-tight text-green-900 sm:text-4xl">
                   Un Bénin où chaque jeune, quelle que soit son origine ou sa condition sociale, dispose des ressources, des compétences
                   et des espaces pour contribuer pleinement au développement national.
                 </p>
@@ -174,7 +174,7 @@ export default function HomePage() {
             align="center"
             eyebrow="Territoires"
             title="Douze départements, soixante-dix-sept communes"
-            lede="Survolez un département pour découvrir ses communes et sa coordination."
+            lede="Touchez ou survolez un département pour découvrir ses communes et sa coordination."
           />
           <div className="mt-16">
             <InteractiveMap />

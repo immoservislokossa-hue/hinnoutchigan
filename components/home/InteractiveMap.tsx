@@ -28,7 +28,7 @@ export function InteractiveMap() {
   const current = departments.find((d) => d.slug === active) ?? departments[0];
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.25fr_1fr] lg:gap-8">
+    <div className="grid gap-5 lg:grid-cols-[1.25fr_1fr] lg:gap-8">
       <ul aria-label="Les douze départements du Bénin" className="grid grid-cols-2 gap-3 md:grid-cols-4 md:[grid-auto-rows:minmax(5.5rem,auto)]">
         {departments.map((d) => {
           const [c, r] = pos[d.slug];
@@ -59,7 +59,7 @@ export function InteractiveMap() {
 
       <div
         aria-live="polite"
-        className="rounded-3xl border border-cream-300 bg-green-50 p-8 sm:p-10"
+        className="order-first rounded-3xl border border-cream-300 bg-green-50 p-6 sm:p-10 lg:order-none"
       >
         <p className="text-xs font-semibold uppercase tracking-[0.12em] text-green-700">
           Région {current.region}

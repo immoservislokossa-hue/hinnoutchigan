@@ -17,8 +17,8 @@ export function PageHero({
 }) {
   const d = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
   return (
-    <section className="relative overflow-hidden border-b border-cream-300 bg-white pb-20 pt-[calc(var(--header-h)+3.5rem)] text-center sm:pb-28 sm:pt-[calc(var(--header-h)+5rem)]">
-      <Orbits className="left-1/2 top-[58%] h-0 w-0" />
+    <section className="relative overflow-hidden border-b border-cream-300 bg-white pb-16 pt-[calc(var(--header-h)+2.5rem)] text-center sm:pb-28 sm:pt-[calc(var(--header-h)+5rem)]">
+      <Orbits className="left-1/2 top-[58%] h-0 w-0" scale={0.85} />
       <div className="container-sjb relative">
         <nav aria-label="Fil d'Ariane" className="hero-rise text-sm text-ink-mute" style={d(0)}>
           <ol className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1">
@@ -49,7 +49,7 @@ export function PageHero({
           <span aria-hidden="true" className="h-2 w-2 rounded-full bg-gold-400" />
           {eyebrow}
         </span>
-        <h1 className="h-display hero-rise mx-auto mt-7 max-w-4xl text-[2.5rem] text-green-900 sm:text-6xl lg:text-[4.5rem]" style={d(200)}>
+        <h1 className="h-display hero-rise mx-auto mt-7 max-w-4xl text-[clamp(2.1rem,9vw,3.4rem)] text-green-900 sm:text-6xl lg:text-[4.5rem]" style={d(200)}>
           {title}
         </h1>
         {lede && (
@@ -58,7 +58,7 @@ export function PageHero({
           </p>
         )}
         {children && (
-          <div className="hero-rise mt-10 flex flex-wrap justify-center gap-4" style={d(440)}>
+          <div className="hero-rise mx-auto mt-10 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4" style={d(440)}>
             {children}
           </div>
         )}

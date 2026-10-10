@@ -26,7 +26,7 @@ export function SectionHeading({
       )}
       <Reveal delay={90}>
         <Tag
-          className={`h-display mt-5 text-[2rem] sm:text-5xl lg:text-[3.4rem] ${dark ? "text-green-900" : "text-green-900"}`}
+          className={`h-display mt-5 text-[clamp(1.75rem,7.5vw,2.25rem)] sm:text-5xl lg:text-[3.4rem] ${dark ? "text-green-900" : "text-green-900"}`}
         >
           {title}
         </Tag>

@@ -41,14 +41,14 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="grid gap-10 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3">
             {footerColumns.map((col) => (
               <div key={col.title}>
                 <h2 className="font-display text-sm font-semibold uppercase tracking-[0.12em] text-green-700">{col.title}</h2>
                 <ul className="mt-6 space-y-3">
                   {col.links.map((l) => (
                     <li key={l.href}>
-                      <Link href={l.href} className="text-[0.95rem] text-ink-soft transition-colors hover:text-green-900">
+                      <Link href={l.href} className="inline-block py-1 text-[0.95rem] text-ink-soft transition-colors hover:text-green-900">
                         {l.label}
                       </Link>
                     </li>
@@ -122,7 +122,12 @@ export function Footer() {
                 Espace membres
               </Link>
             </li>
-            <li>{site.credit ? `Site réalisé par ${site.credit}` : <Todo what="mention de l'agence" />}</li>
+            <li>
+              Fait avec soin par{" "}
+              <a href={site.creditUrl} target="_blank" rel="noopener" className="font-semibold text-green-800 underline decoration-gold-400 decoration-2 underline-offset-4 hover:text-green-700">
+                {site.credit}
+              </a>
+            </li>
           </ul>
         </div>
       </div>

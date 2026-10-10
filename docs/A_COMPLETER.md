@@ -17,7 +17,7 @@ Pour retrouver tous les marqueurs : `grep -rn "<Todo" app components`.
 - **Identité** : prénoms et noms des 7 membres du BEN + photos officielles (`Portrait`).
 - **Présidence** : mot du Président, vision, priorités, actions réalisées, engagements.
 - **Départements** : responsables de chaque coordination, actualités et activités locales (12 pages).
-- **Coordonnées** (`content/site.ts`) : courriel, téléphones, adresse physique, réseaux sociaux, mention de l'agence (`credit`).
+- **Coordonnées** (`content/site.ts`) : courriel, téléphones, adresse physique, réseaux sociaux.
 - **Actualités, agenda, rapports** : premiers articles, prochaines dates, rapport annuel et rapports financiers certifiés.
 - **Documents** : règlement intérieur, registre des délibérations, rapports d'activités.
 - **Partenaires** : logos et noms des partenaires conventionnés.

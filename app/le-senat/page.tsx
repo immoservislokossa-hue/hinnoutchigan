@@ -115,11 +115,11 @@ export default function SenatPage() {
             </p>
           </Reveal>
           <Reveal dir="right" className="flex justify-center">
-            <div className="relative p-5">
+            <div className="relative w-full max-w-xs p-5">
               <span aria-hidden="true" className="absolute inset-0 border border-gold-400" />
               <span aria-hidden="true" className="absolute inset-[9px] border border-cream-300" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.jpg" alt="Logo officiel du Sénat des Jeunes du Bénin" width={680} height={708} className="relative h-auto w-72 bg-white p-2 sm:w-80" />
+              <img src="/logo.jpg" alt="Logo officiel du Sénat des Jeunes du Bénin" width={680} height={708} className="relative h-auto w-full max-w-[18rem] bg-white p-2 sm:max-w-xs" />
             </div>
           </Reveal>
         </div>

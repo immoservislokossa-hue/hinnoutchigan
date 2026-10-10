@@ -38,7 +38,13 @@ export default function MentionsPage() {
             </p>
 
             <h2 className="h-display mb-4 mt-12 text-2xl text-green-900">Conception et réalisation</h2>
-            <p>{site.credit ?? <Todo what="agence ou prestataire" />}</p>
+            <p>
+              Site conçu et réalisé avec soin par{" "}
+              <a href={site.creditUrl} target="_blank" rel="noopener">
+                {site.credit}
+              </a>
+              .
+            </p>
 
             <h2 className="h-display mb-4 mt-12 text-2xl text-green-900">Propriété intellectuelle</h2>
             <p>

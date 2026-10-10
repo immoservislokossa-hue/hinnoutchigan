@@ -45,6 +45,7 @@ export const viewport: Viewport = {
   themeColor: "#0d3a1d",
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 const orgJsonLd = {

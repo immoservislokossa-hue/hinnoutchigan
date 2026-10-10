@@ -25,7 +25,8 @@ export const site = {
     youtube: null as string | null,
     whatsapp: null as string | null,
   },
-  credit: null as string | null,
+  credit: "growbrandweb.com",
+  creditUrl: "https://growbrandweb.com",
 };
 
 export type NavLink = { label: string; href: string; description?: string };

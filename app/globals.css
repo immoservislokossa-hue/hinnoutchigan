@@ -49,6 +49,7 @@
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + 1rem);
   -webkit-text-size-adjust: 100%;
@@ -56,6 +57,8 @@ html {
 
 body {
   margin: 0;
+  overflow-x: clip;
+  overflow-wrap: break-word;
   background: #fff;
   color: var(--color-ink);
   font-family: var(--font-sans);
@@ -72,6 +75,13 @@ body {
 :focus-visible {
   outline: 3px solid var(--color-gold-400);
   outline-offset: 3px;
+}
+
+/* Les éléments de grille ne doivent jamais élargir la page (formulaires, tableaux) */
+@layer base {
+  .grid > * {
+    min-width: 0;
+  }
 }
 
 /* ---------- Typographie ---------- */
@@ -170,7 +180,8 @@ body {
   font-size: 0.95rem;
   line-height: 1;
   text-decoration: none;
-  white-space: nowrap;
+  max-width: 100%;
+  text-align: left;
   color: var(--btn-fg);
   background:
     linear-gradient(180deg, rgb(255 255 255 / 0.26), rgb(255 255 255 / 0) 55%),
@@ -359,14 +370,16 @@ body {
   display: inline-block;
   padding: 0.05em 0.6em;
   font-family: var(--font-sans);
-  font-size: 0.78em;
+  font-size: max(0.78em, 0.75rem);
   font-weight: 500;
   font-style: normal;
+  line-height: 1.5;
   color: var(--color-gold-600);
   background: #fff8d6;
   border: 1px dashed var(--color-gold-500);
   border-radius: 6px;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 .surface-dark .todo,
 .on-dark .todo {
